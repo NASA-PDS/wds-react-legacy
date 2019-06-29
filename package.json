@@ -1,10 +1,10 @@
 {
-  "name": "@hodgef/js-library-boilerplate",
-  "version": "2.0.13",
-  "description": "Javascript Starter Kit for building libraries",
+  "name": "react-embeddable-widget-starter",
+  "version": "0.0.1",
+  "description": "React Embeddable Widget Starter",
   "main": "build/index.js",
   "scripts": {
-    "start": "node scripts/start.js",
+    "dev": "node scripts/start.js",
     "build": "node scripts/build.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",
@@ -14,15 +14,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hodgef/js-library-boilerplate"
+    "url": "https://github.com/jasan-s/react-embeddable-widget-starter"
   },
-  "author": "Francisco Hodge <hello@franciscohodge.com> (https://github.com/hodgef)",
+  "author": "Jasan Singh <contact@jasansingh.com> (https://github.com/jasan-s)",
   "bugs": {
-    "url": "https://github.com/hodgef/js-library-boilerplate/issues"
+    "url": "https://github.com/jasan-s/react-embeddable-widget-starter/issues"
   },
-  "homepage": "https://github.com/hodgef/js-library-boilerplate",
+  "homepage": "https://github.com/jasan-s/react-embeddable-widget-starter",
   "keywords": [
-    "library"
+    "starter",
+    "React",
+    "javascript",
+    "embeddable",
+    "react-widget"
   ],
   "license": "MIT",
   "devDependencies": {

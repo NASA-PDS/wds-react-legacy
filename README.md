@@ -1,74 +1,106 @@
  <div align="center">
- <img align="center" width="180" src="https://franciscohodge.com/project-pages/js-library-boilerplate/images/JSLB2.png" />
-  <h2>Javascript Library Boilerplate</h2>
-  <blockquote>Library Starter Kit for your Javascript projects</blockquote>
-  <a href="https://travis-ci.org/hodgef/js-library-boilerplate"><img src="https://travis-ci.org/hodgef/js-library-boilerplate.svg?branch=master" /></a> <img src="https://img.shields.io/david/hodgef/js-library-boilerplate.svg" /> <a href="https://david-dm.org/hodgef/js-library-boilerplate?type=dev"><img src="https://img.shields.io/david/dev/hodgef/js-library-boilerplate.svg" /></a> <img src="https://api.dependabot.com/badges/status?host=github&repo=hodgef/js-library-boilerplate" />
+  <h2>React Embeddable Widget Starter</h2>
 
- #### This is a more robust library boilerplate. For a minimal alternative, check out [js-library-boilerplate-basic](https://github.com/hodgef/js-library-boilerplate-basic).
 </div>
-
 
 ## ⭐️ Features
 
 - Webpack 4
 - Babel 7
-- Hot Reloading (`npm start`)
+- Hot Reloading (`npm run dev`)
 - CSS Autoprefixer
 - SASS/SCSS support
 - UMD exports, so your library works everywhere.
 - Based on [CRA v3.0.0](https://github.com/facebook/create-react-app/releases/tag/v3.0.0) (For Vanilla JS libs or React libs)
 - Jest unit testing
-- `npm run demo` To build a ready-for-deployment demo [(Example)](https://github.com/hodgef/js-library-boilerplate/tree/master/demo)
-- Customizable file headers for your build [(Example 1)](https://github.com/hodgef/js-library-boilerplate/blob/master/build/index.js) [(Example2)](https://github.com/hodgef/js-library-boilerplate/blob/master/build/index.css)
-- Configurable `postinstall` message [(Example)](https://github.com/hodgef/js-library-boilerplate/blob/master/bin/postinstall)
+- `npm run demo` To build a ready-for-deployment demo
+- Customizable file headers for your build
+- Configurable `postinstall` message
 - Daily [dependabot](https://dependabot.com) dependency updates
 
 ## 📦 Getting Started
 
 ```
-git clone https://github.com/hodgef/js-library-boilerplate.git myLibrary
+git clone https://github.com/jasan-s/react-embeddable-widget-starter.git reactWidget
+cd reactWidget
 npm install
 ```
 
 ## 💎 Customization
 
 > Before shipping, make sure to:
+
 1. Edit `LICENSE` file
 2. Edit `package.json` information (These will be used to generate the headers for your built files)
-3. Edit `library: "MyLibrary"` with your library's export name in `./config/webpack.config.js`
+3. Edit `library: "reactWidget"` with your library's export name in `./config/webpack.config.js`
 4. Edit `./bin/postinstall` (If you would like to display a message on package install)
 
 ## 🚀 Deployment
+
 1. `npm publish`
 2. Your users can include your library as usual
 
 ### npm
-```
-import MyLibrary from 'my-library';
-import 'my-library/build/index.css' // If you import a css file in your library
 
-let libraryInstance = new MyLibrary();
+```
+  import ReactWidget from 'reactWidget'
+   // then  invoke loadReactWidget()
+  loadReactWidget = () => {
+    ;(function() {
+      const reactWidget__container = document.createElement('div')
+      reactWidget__container.setAttribute('id', 'reactWidget__container')
+      document.body.appendChild(reactWidget__container)
+      ReactWidget.config({
+        environment: 'dev',
+        authId: 'xxxxxxx',
+        apiKey: 'xxxxxxx',
+      })
+      var myReactWidget = ReactWidget.widgets.myWidget.new({
+        selector: '#reactWidget__container',
+      })
+      myReactWidget.render({ arg: {} })
+      console.log('ReactWidget Loaded!', ReactWidget)
+    })()
 ...
 ```
 
 ### self-host/cdn
-```
-<link href="build/index.css" rel="stylesheet">
-<script src="build/index.js"></script>
 
-let MyLibrary = window.MyLibrary.default;
-let libraryInstance = new MyLibrary();
+To test run: `npm run build` and then open the `index.html`(located in `src/selfHost-or-cdn-demo`)
+
+```
+    <!--  start reactWidget snippet -->
+    <script>
+      ;(function(window) {
+        var s = document.createElement('script')
+        s.type = 'text/javascript'
+        s.async = true
+        s.src = './build/index.js'
+        s.onload = () => {
+          var reactWidget__container = document.createElement('div')
+          reactWidget__container.setAttribute('id', 'reactWidget__container')
+          document.body.appendChild(reactWidget__container)
+
+          var s_s = document.getElementsByTagName('head')[0]
+          s_s.insertAdjacentHTML(
+            'beforeend',
+            `<link rel="stylesheet" type="text/css" href="./build/index.css" />`,
+          )
+          var reactWidget = window.reactWidget.default
+          reactWidget.config({
+            environment: 'dev',
+            authId: 'xxxxxxx',
+            apiKey: 'xxxxxxx',
+          })
+          var myReactWidget = reactWidget.widgets.myWidget.new({
+            selector: '#reactWidget__container',
+          })
+          myReactWidget.render({ arg: null })
+        }
+        var x = document.getElementsByTagName('script')[0]
+        x.parentNode.insertBefore(s, x)
+      })(window, undefined)
+    </script>
+    <!-- End reactWidget snippet -->
 ...
 ```
-
-## ✅ Libraries built with this boilerplate
-
-> Made a library using this starter kit? Share it here by [submitting a pull request](https://github.com/hodgef/js-library-boilerplate/pulls)!
-
-- [hovercard](https://github.com/AnandChowdhary/hovercard) - Wikipedia summary cards for the web
-- [perfect-immutable](https://github.com/Lukasz-pluszczewski/perfect-immutable) - Library to provide immutable methods
-- [react-simple-keyboard](https://github.com/hodgef/react-simple-keyboard) - React Virtual Keyboard
-- [redux-better-promise](https://github.com/Lukasz-pluszczewski/redux-better-promise) - Simple and powerful redux middleware
-- [redux-breeze](https://github.com/Lukasz-pluszczewski/reduxBreeze) - Powerful redux wrapper
-- [simple-keyboard](https://github.com/hodgef/simple-keyboard) - Javascript Virtual Keyboard
-- [simple-keyboard-layouts](https://github.com/hodgef/simple-keyboard-layouts) - Layout kit for simple-keyboard
