@@ -95,6 +95,7 @@ To test run: `npm run build` and then open the `index.html`(located in `src/self
           var myReactWidget = reactWidget.widgets.myWidget.new({
             selector: '#reactWidget__container',
           })
+          window.myReactWidget = myReactWidget
           myReactWidget.render({ arg: null })
         }
         var x = document.getElementsByTagName('script')[0]
