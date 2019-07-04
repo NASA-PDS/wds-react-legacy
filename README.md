@@ -58,6 +58,7 @@ npm install
       var myReactWidget = ReactWidget.widgets.myWidget.new({
         selector: '#reactWidget__container',
       })
+      window.myReactWidget = myReactWidget
       myReactWidget.render({ arg: {} })
       console.log('ReactWidget Loaded!', ReactWidget)
     })()
