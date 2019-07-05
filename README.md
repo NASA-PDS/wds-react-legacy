@@ -83,5 +83,4 @@ To test run: `npm run build` and then open the `index.html`(located in `src/self
       })(window, undefined)
     </script>
     <!-- End reactWidget snippet -->
-...
 ```
