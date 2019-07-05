@@ -13,7 +13,7 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root">Demo Page</div>
+    <div id="root"></div>
     <!--  start reactWidget snippet -->
     <script>
       ;(function(window) {
@@ -22,26 +22,19 @@
         s.async = true
         s.src = '../../build/index.js'
         s.onload = () => {
-          var reactWidget__container = document.createElement('div')
-          reactWidget__container.setAttribute('id', 'reactWidget__container')
-          document.body.appendChild(reactWidget__container)
-
           var s_s = document.getElementsByTagName('head')[0]
           s_s.insertAdjacentHTML(
             'beforeend',
             `<link rel="stylesheet" type="text/css" href="../../build/index.css" />`,
           )
-          var reactWidget = window.reactWidget.default
-          reactWidget.config({
+          var reactWidget = window.reactWidget_js.default
+          reactWidget.init({
             environment: 'dev',
             authId: 'xxxxxxx',
             apiKey: 'xxxxxxx',
           })
-          var myReactWidget = reactWidget.widgets.myWidget.new({
-            selector: '#reactWidget__container',
-          })
-          myReactWidget.render({ arg: null })
-          console.log('myReactWidget Loaded!', myReactWidget)
+          window.reactWidget = reactWidget
+          console.log('reactWidget Loaded!', reactWidget)
         }
         var x = document.getElementsByTagName('script')[0]
         x.parentNode.insertBefore(s, x)

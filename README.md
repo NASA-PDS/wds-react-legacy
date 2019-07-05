@@ -32,7 +32,7 @@ npm install
 
 1. Edit `LICENSE` file
 2. Edit `package.json` information (These will be used to generate the headers for your built files)
-3. Edit `library: "reactWidget"` with your library's export name in `./config/webpack.config.js`
+3. Edit `library: "reactWidget_js"` with your library's export name in `./config/webpack.config.js`
 4. Edit `./bin/postinstall` (If you would like to display a message on package install)
 
 ## 🚀 Deployment
@@ -43,25 +43,12 @@ npm install
 ### npm
 
 ```
-  import ReactWidget from 'reactWidget'
-   // then  invoke loadReactWidget()
-  loadReactWidget = () => {
-    ;(function() {
-      const reactWidget__container = document.createElement('div')
-      reactWidget__container.setAttribute('id', 'reactWidget__container')
-      document.body.appendChild(reactWidget__container)
-      ReactWidget.config({
-        environment: 'dev',
-        authId: 'xxxxxxx',
-        apiKey: 'xxxxxxx',
-      })
-      var myReactWidget = ReactWidget.widgets.myWidget.new({
-        selector: '#reactWidget__container',
-      })
-      myReactWidget.render({ arg: {} })
-      console.log('ReactWidget Loaded!', ReactWidget)
-    })()
-...
+  import reactWidget from 'reactWidget_js'
+  reactWidget.init({
+    env: 'dev',
+    authId: 'xxxxxxx',
+    apiKey: 'xxxxxxx',
+  })
 ```
 
 ### self-host/cdn
@@ -75,27 +62,21 @@ To test run: `npm run build` and then open the `index.html`(located in `src/self
         var s = document.createElement('script')
         s.type = 'text/javascript'
         s.async = true
-        s.src = './build/index.js'
+        s.src = '../../build/index.js'
         s.onload = () => {
-          var reactWidget__container = document.createElement('div')
-          reactWidget__container.setAttribute('id', 'reactWidget__container')
-          document.body.appendChild(reactWidget__container)
-
           var s_s = document.getElementsByTagName('head')[0]
           s_s.insertAdjacentHTML(
             'beforeend',
-            `<link rel="stylesheet" type="text/css" href="./build/index.css" />`,
+            `<link rel="stylesheet" type="text/css" href="../../build/index.css" />`,
           )
-          var reactWidget = window.reactWidget.default
-          reactWidget.config({
+          var reactWidget = window.reactWidget_js.default
+          reactWidget.init({
             environment: 'dev',
             authId: 'xxxxxxx',
             apiKey: 'xxxxxxx',
           })
-          var myReactWidget = reactWidget.widgets.myWidget.new({
-            selector: '#reactWidget__container',
-          })
-          myReactWidget.render({ arg: null })
+          window.reactWidget = reactWidget
+          console.log('reactWidget Loaded!', reactWidget)
         }
         var x = document.getElementsByTagName('script')[0]
         x.parentNode.insertBefore(s, x)

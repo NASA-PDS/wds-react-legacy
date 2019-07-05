@@ -2,37 +2,25 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-let reactWidgetConfig = null
+const targetContainerId = `widget__container`
 export default {
-  config: config => {
-    reactWidgetConfig = config
+  init: config => {
+    if (!document.getElementById(targetContainerId)) {
+      const targetContainer = document.createElement('div')
+      targetContainer.setAttribute('id', targetContainerId)
+      document.body.appendChild(targetContainer)
+    }
+    ReactDOM.render(
+      <App apiKey={config.apiKey} authId={config.authId} env={config.env} />,
+      document.getElementById(targetContainerId),
+    )
   },
-
-  widgets: {
-    myWidget: {
-      new: config => {
-        return {
-          render: args => {
-            ReactDOM.render(
-              <App
-                apiKey={
-                  args.apiKey || config.apiKey || reactWidgetConfig.apiKey
-                }
-                authId={
-                  args.authId || config.authId || reactWidgetConfig.authId
-                }
-                selector={config.selector || reactWidgetConfig.selector}
-              />,
-              document.querySelector(config.selector),
-            )
-          },
-          unmount() {
-            ReactDOM.unmountComponentAtNode(
-              document.querySelector(config.selector),
-            )
-          },
-        }
-      },
-    },
+  unmount() {
+    const targetContainer = document.getElementById(targetContainerId)
+    if (targetContainer) {
+      ReactDOM.unmountComponentAtNode(
+        document.getElementById(targetContainerId),
+      )
+    }
   },
 }
