@@ -27,13 +27,11 @@
             'beforeend',
             `<link rel="stylesheet" type="text/css" href="../../build/index.css" />`,
           )
-          var reactWidget = window.reactWidget_js.default
           reactWidget.init({
             environment: 'dev',
             authId: 'xxxxxxx',
             apiKey: 'xxxxxxx',
           })
-          window.reactWidget = reactWidget
           console.log('reactWidget Loaded!', reactWidget)
         }
         var x = document.getElementsByTagName('script')[0]

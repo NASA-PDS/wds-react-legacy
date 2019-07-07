@@ -37,19 +37,8 @@ npm install
 
 ## 🚀 Deployment
 
-1. `npm publish`
-2. Your users can include your library as usual
-
-### npm
-
-```
-  import reactWidget from 'reactWidget_js'
-  reactWidget.init({
-    env: 'dev',
-    authId: 'xxxxxxx',
-    apiKey: 'xxxxxxx',
-  })
-```
+1. `npm run build`
+2. use any static hosting service to deploy the `build` folder (\*use semantic versioning for updates, add CDN for performance)
 
 ### self-host/cdn
 
@@ -62,6 +51,7 @@ To test run: `npm run build` and then open the `index.html`(located in `src/self
         var s = document.createElement('script')
         s.type = 'text/javascript'
         s.async = true
+        s.crossOrigin = 'anonymous'
         s.src = '../../build/index.js'
         s.onload = () => {
           var s_s = document.getElementsByTagName('head')[0]
@@ -69,13 +59,11 @@ To test run: `npm run build` and then open the `index.html`(located in `src/self
             'beforeend',
             `<link rel="stylesheet" type="text/css" href="../../build/index.css" />`,
           )
-          var reactWidget = window.reactWidget_js.default
           reactWidget.init({
             environment: 'dev',
             authId: 'xxxxxxx',
             apiKey: 'xxxxxxx',
           })
-          window.reactWidget = reactWidget
           console.log('reactWidget Loaded!', reactWidget)
         }
         var x = document.getElementsByTagName('script')[0]
