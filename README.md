@@ -7,11 +7,11 @@ The PDS design system provides a theme that can be added on top of Material.
 ### Usage In React Applications
 There are 3 steps to installing and using the PDS design system in react. The first is to install Material UI. Second is to apply the PDS theme. Third is to change existing HTML tags into Material components.
 
-Material UI makes installing or updating an existing react application with material design as simple as possible. Most of the information written here can be found on the material-ui website at: https://material-ui.com but it will be condensed here for practicality.
+Material UI makes installing or updating an existing react application with Material design as simple as possible. Most of the information written here can be found on the Material UI website at: https://material-ui.com but it will be condensed here for practicality.
 
 This section is for react applications built with react-app. https://reactjs.org/docs/create-a-new-react-app.html
 
-This information was written as of July 2020. Reference links will be included to the latest on material ui.
+This information was written as of July 2020. Reference links will be included to the latest on Material UI.
 
 #### 1) Install Material UI
 Use npm to install the Material IU core into an existing react application. This will include all the components such as Button, Container, Slider and App Bar.
@@ -53,7 +53,7 @@ export default Theme;
 
 Any values that override the values at https://material-ui.com/customization/default-theme/#default-theme will then be used throughout the application. In this example we did an override of the palette section’s primary and secondary colors. Any component that uses color=“primary” will now be a light gray and color=“secondary” will be red.
 
-In a similar fashion any of the values that material ui contains can be overridden.
+In a similar fashion any of the values that Material UI contains can be overridden.
 
 This theme file is where the content from the theme file provided by the PDS will be placed.
 
@@ -103,8 +103,8 @@ ReactDOM.render(
 
 More details and examples for Theme Provider can be found here: https://material-ui.com/styles/api/ in the theme provider section.
 
-#### 2) Use Material UI Components
-Using a component from material ui is as simple as copy pasting the code from the desired component in the components section of the documents on the material ui site. https://material-ui.com/components/box/
+#### 3) Use Material UI Components
+Using a component from Material UI is as simple as copy pasting the code from the desired component in the components section of the documents on the material ui site. https://material-ui.com/components/box/
 
 There is however one thing to be aware of. Several HTML elements in order to accept Material UI’s props and theming must be replaced with a component. For example a `<span>` would be better declared with Material UI’s “Box” component then given the prop component=“span”.
 
