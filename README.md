@@ -27,7 +27,7 @@ Core reference: https://material-ui.com/getting-started/installation/
 The full list of Lab components can be found here: https://material-ui.com/components/about-the-lab/
 
 #### 2) Override The Default Theme
-##### 2-A) Create A Theme File
+##### a) Create A Theme File
 Material UI has a default set of typographies, colors, spacings and transitions. These can all be found at: https://material-ui.com/customization/default-theme/#default-theme
 
 In order to override these default styles and use them throughout the application a theme file must be created which will then be passed into a Theme Provider.
@@ -53,11 +53,11 @@ export default Theme;
 
 Any values that override the values at https://material-ui.com/customization/default-theme/#default-theme will then be used throughout the application. In this example we did an override of the palette section’s primary and secondary colors. Any component that uses color=“primary” will now be a light gray and color=“secondary” will be red.
 
-In a similar fashion any of the values that Material UI contains can be overridden.
+In a similar fashion any of the values that Material UI contains in its [default](https://material-ui.com/customization/default-theme/#default-theme) theme can be overridden.
 
 This theme file is where the content from the theme file provided by the PDS will be placed.
 
-##### 2-B) Pass The Theme File Into A Theme Provider
+##### b) Pass The Theme File Into A Theme Provider
 In order to use the theme file a Theme Provider must be used. The theme provider is included in the core package “@material-ui/core/styles’ The simplest way to use it is to wrap it around your app component and pass it the theme file. This can be done in your index.js file. 
 
 Once there it can be used throughout your application.
@@ -71,7 +71,7 @@ import Theme from './Theme';
 import App from './App';
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={Theme}>
         <App />
     </ThemeProvider>,
     rootElement
