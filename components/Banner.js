@@ -14,7 +14,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import { withStyles } from '@material-ui/core/styles';
 import logo from '../../assets/images/pdsLogo.png';
-import infoImg from '../../assets/images/info.png';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = (theme) => ({
     titleLink: {
@@ -66,6 +66,7 @@ const useStyles = (theme) => ({
         borderRadius: '0',
         padding: '5px 0 6px 5px',
         textTransform: 'none',
+        fontWeight: '400',
         '&:hover': {
             backgroundColor: 'rgb(23, 23, 23)',
             boxShadow: 'none'
@@ -83,9 +84,9 @@ const useStyles = (theme) => ({
     arrowIcon: {
         marginLeft: '40px'
     },
-    infoImg: {
-        height: '14px',
-        width: '14px'
+    infoIcon: {
+        height: '17px',
+        width: '17px'
     },
     infoButton: {
         padding: '0 0 0 5px'
@@ -248,11 +249,9 @@ class Banner extends Component {
                         onMouseLeave={this.handleInfoMouseLeave}
                         onKeyDown={this.handleInfoEnterOpen}
                     >
-                        <img
-                            src={infoImg}
-                            className={classes.infoImg}
-                            alt=''
-                        />
+                        <SvgIcon className={classes.infoIcon}>
+                            <path fill="white" d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path>
+                        </SvgIcon>
                     </IconButton>
                     <Popover
                         id="info-menu"
@@ -264,7 +263,8 @@ class Banner extends Component {
                             horizontal: 'left'
                         }}
                         transformOrigin={{
-                            horizontal: '40px'
+                            horizontal: 'left',
+                            vertical: 'top',
                         }}
                         PaperProps={{
                             style: {
