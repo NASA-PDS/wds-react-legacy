@@ -38,7 +38,8 @@ const useStyles = (theme) => ({
         width: '48px'
     },
     pdsBanner: {
-        background: '#000000'
+        background: '#000000',
+        height: '32px'
     },
     pdsBannerText:{
         color: '#ffffff',
@@ -67,6 +68,7 @@ const useStyles = (theme) => ({
         padding: '5px 0 6px 5px',
         textTransform: 'none',
         fontWeight: '400',
+        height: '32px',
         '&:hover': {
             backgroundColor: 'rgb(23, 23, 23)',
             boxShadow: 'none'
@@ -96,6 +98,10 @@ const useStyles = (theme) => ({
     },
     infoText: {
         fontSize: '12px'
+    },
+    listItemTextFirst: {
+        height:'0',
+        margin:'0'
     }
 });
 
@@ -250,7 +256,10 @@ class Banner extends Component {
                         onKeyDown={this.handleInfoEnterOpen}
                     >
                         <SvgIcon className={classes.infoIcon}>
-                            <path fill="white" d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path>
+                            <path 
+                                fill="white" 
+                                d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z">
+                            </path>
                         </SvgIcon>
                     </IconButton>
                     <Popover
@@ -315,6 +324,9 @@ class Banner extends Component {
                             }
                         }}
                     >
+                        <StyledMenuItem>
+                            <ListItemText className={classes.listItemTextFirst}/>
+                        </StyledMenuItem>
                         <StyledMenuItem onClick={() => {this.handleNodeSelect('https://pds-atmospheres.nmsu.edu')}}>
                             <Link
                                 className={classes.menuLink}
@@ -347,7 +359,6 @@ class Banner extends Component {
                                 className={classes.menuLink}
                                 href='https://naif.jpl.nasa.gov/naif'
                                 rel='noopener'
-                                inputRef={this.textFieldRef}
                             >
                                 <ListItemText className={classes.listItemText} primary='Navigational and Ancillary Information (NAIF)'/>
                             </Link>
