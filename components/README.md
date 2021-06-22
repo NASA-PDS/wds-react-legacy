@@ -1,5 +1,5 @@
 # PDS Banner App Bar
-This is an app bar that appears at the top of every PDS page. It is a React and Material UI implementation of the original that can be found at: https://github.com/NASA-PDS/pds-wds-web/tree/master/app-bar
+This is an app bar that appears at the top of every PDS page. It is a React and Material UI implementation of the original that can be found at: https://github.com/NASA-PDS/pds-wds-web/tree/main/app-bar
 
 This version is a stand alone version that does not need all the pds-wds code to work. It will work in any React + Material UI project.
 
