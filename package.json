@@ -12,15 +12,6 @@
     "postinstall": "node bin/postinstall",
     "prepare": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jasan-s/react-embeddable-widget-starter"
-  },
-  "author": "Jasan Singh <contact@jasansingh.com> (https://github.com/jasan-s)",
-  "bugs": {
-    "url": "https://github.com/jasan-s/react-embeddable-widget-starter/issues"
-  },
-  "homepage": "https://github.com/jasan-s/react-embeddable-widget-starter",
   "keywords": [
     "starter",
     "React",
@@ -173,5 +164,10 @@
       ]
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "redux-thunk": "^2.3.0"
+  }
 }
