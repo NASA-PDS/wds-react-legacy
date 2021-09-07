@@ -1,74 +1,41 @@
- <div align="center">
-  <h2>React Embeddable Widget Starter</h2>
+# React Embeddable Widget And Npm Package Builder
 
-</div>
+## Getting Started
+`npm install`
 
-## ⭐️ Features
+## Deployment
+`npm run build`
+Two directories will be created `/build` and `/embedbuild`.
+`/build` will the contain the ready to deploy npm files.
+`/embedbuild` will contain the ready to deploy embeddable widget files.
 
-- Webpack 4
-- Babel 7
-- Hot Reloading (`npm run dev`)
-- CSS Autoprefixer
-- SASS/SCSS support
-- UMD exports, so your library works everywhere.
-- Based on [CRA v3.0.0](https://github.com/facebook/create-react-app/releases/tag/v3.0.0) (For Vanilla JS libs or React libs)
-- Jest unit testing
-- `npm run demo` To build a ready-for-deployment demo
-- Customizable file headers for your build
-- Configurable `postinstall` message
-- Daily [dependabot](https://dependabot.com) dependency updates
+### Embed Widget Deployment
+Drop the contents of the `/embedbuild` directory into a project. 
 
-## 📦 Getting Started
+Create a directory and place the files inside. For example 
+`pds-widgets/` 
 
-```
-git clone https://github.com/jasan-s/react-embeddable-widget-starter.git reactWidget
-cd reactWidget
-npm install
-```
+Then link the `index.js` file in the project HTML using the script tag.
+`<script src="pds-widgets/index.js"></script>`
 
-## 💎 Customization
+Add a div with the ID of the component desired in a chosen location in the project.
+`<div id="pdswidget"></div>`
 
-> Before shipping, make sure to:
+## Development
+### Source
+The components are found inside `/src/pds/`
 
-1. Edit `LICENSE` file
-2. Edit `package.json` information (These will be used to generate the headers for your built files)
-3. Edit `library: "reactWidget_js"` with your library's export name in `./config/webpack.config.js`
-4. Edit `./bin/postinstall` (If you would like to display a message on package install)
+Each component has an index.js, <name>.stories.js, and a <name>.js file.
+`index.js` is for building the embeddable widget.
+`<name>.stories.js` is for showing the component in storybook. 
+`<name>.js` is for building the npm package. 
 
-## 🚀 Deployment
+There are three index files inside `/src/pds/` that need to be updated with an import of a new component when one is created. These are `embedBuildIndex.js`, `embedIndex.js` and `npmBuildIndex.js`
 
-1. `npm run build`
-2. use any static hosting service to deploy the `build` folder (\*use semantic versioning for updates, add CDN for performance)
+### Development Scripts
+For testing embeddable widgets run the script `npm run embeddev` This will run a server with `/public/embedIndex.html` as the entry point.
 
-### self-host/cdn
+For viewing the components in storybook run the script  `npm run storybook`. This will run a server with the components loaded into storybook.
 
-To test run: `npm run build` and then open the `index.html`(located in `src/selfHost-or-cdn-demo`)
+For testing the NPM package run the script `npm run npmbuild` Then run `npm link` you can then create a client app and import using `npm link <appname>`
 
-```
-    <!--  start reactWidget snippet -->
-    <script>
-      ;(function(window) {
-        var s = document.createElement('script')
-        s.type = 'text/javascript'
-        s.async = true
-        s.crossOrigin = 'anonymous'
-        s.src = '../../build/index.js'
-        s.onload = () => {
-          var s_s = document.getElementsByTagName('head')[0]
-          s_s.insertAdjacentHTML(
-            'beforeend',
-            `<link rel="stylesheet" type="text/css" href="../../build/index.css" />`,
-          )
-          reactWidget.init({
-            environment: 'dev',
-            authId: 'xxxxxxx',
-            apiKey: 'xxxxxxx',
-          })
-          console.log('reactWidget Loaded!', reactWidget)
-        }
-        var x = document.getElementsByTagName('script')[0]
-        x.parentNode.insertBefore(s, x)
-      })(window, undefined)
-    </script>
-    <!-- End reactWidget snippet -->
-```

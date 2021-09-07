@@ -29,16 +29,17 @@ const {
 } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
-const configFactory = require('../config/webpack.config');
+const configFactory = require('../config/webpack.config.embeddev');
 const createDevServerConfig = require('../config/webpackDevServer.config');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appDemoIndexJs])) {
+if (!checkRequiredFiles([paths.appEmbedHtml, paths.appEmbedIndexJs])) {
   process.exit(1);
 }
+
 
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
@@ -75,6 +76,7 @@ checkBrowsers(paths.appPath, isInteractive)
       // We have not found a port.
       return;
     }
+
     const args = process.argv;
     const testMode = args[2] === "--testMode";
     const config = configFactory('development');
@@ -88,7 +90,15 @@ checkBrowsers(paths.appPath, isInteractive)
       errors: errors =>
         devServer.sockWrite(devServer.sockets, 'errors', errors),
     };
+
     // Create a webpack compiler that is configured with custom messages.
+    console.log("appname", appName);
+    console.log("config", config);
+    console.log("devSocket", devSocket);
+    console.log("urls", urls);
+    console.log("useYarn", useYarn);
+    console.log("useTypeScript", useTypeScript);
+    console.log("webpack", webpack);
     const compiler = createCompiler({
       appName,
       config,
@@ -98,6 +108,7 @@ checkBrowsers(paths.appPath, isInteractive)
       useTypeScript,
       webpack,
     });
+    
     // Load proxy config
     const proxySetting = require(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(proxySetting, paths.appPublic);
