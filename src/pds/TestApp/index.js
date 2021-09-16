@@ -5,12 +5,6 @@ import TestApp from './TestApp'
 const targetContainerId = `TestApp`
 export default {
   init: config => {
-    /*if (!document.getElementById(targetContainerId)) {
-      const targetContainer = document.createElement('div')
-      targetContainer.setAttribute('id', targetContainerId)
-      document.body.appendChild(targetContainer)
-    }
-    */
    if(document.getElementById(targetContainerId)){
       ReactDOM.render(
         <TestApp/>,

@@ -1,4 +1,5 @@
 import TestApp from './TestApp'
+import DoiSearch from './DoiSearch'
 
 TestApp.init({
   env: 'dev',
@@ -6,3 +7,7 @@ TestApp.init({
   apiKey: 'xxxxxxx',
 })
 console.log('TestApp Loaded!', TestApp)
+
+DoiSearch.init({
+})
+console.log('DoiSearch Loaded!', DoiSearch)
