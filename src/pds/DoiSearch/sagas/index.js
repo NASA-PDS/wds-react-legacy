@@ -142,7 +142,7 @@ function* sendSearch(action){
         if(!identifier.startsWith('urn:nasa:pds:')) {
             let searchIdentifier = identifier.replace(/\//g, '-') + '*';
             identifier = '*' + searchIdentifier;
-            endpoint += '?identifier=' + encodeURIComponent(identifier);
+            endpoint += '?ids=' + encodeURIComponent(identifier);
         }
         else{
             isSingleResult = true;
