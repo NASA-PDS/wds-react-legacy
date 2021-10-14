@@ -34,13 +34,14 @@ const SearchBar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [identifier, setIdentifier] = useState('');
+  let [prevIdentifier, setPrevIdentifier] = useState(0);
   
   const searchIdentifier =  useSelector(state => {
     return state.appReducer.searchIdentifier;
   });
 
   const handleInputChange = (event) => {
-    setIdentifier(event.target.value.trim());
+    setIdentifier(event.target.value);
   };
   
   const handleKeyPress = (event) => {
@@ -49,25 +50,24 @@ const SearchBar = () => {
       handleSearch();
     }
   };
-  
+
   const handleSearch = () => {
+    setPrevIdentifier(++prevIdentifier);
     history.push("/search/" + identifier);
-    dispatch(rootActions.appAction.sendSearchRequest(identifier));
   };
 
   const handleClear = () => {
     setIdentifier('');
+    setPrevIdentifier(++prevIdentifier);
+    history.replace("/search/");
   };
 
   useEffect(() => {
-    console.log("search bar use effect");
-    console.log("Search Bar, SEARCH TEXT", searchText);
     if(searchText){
       setIdentifier(searchText);
+      dispatch(rootActions.appAction.sendSearchRequest(searchText));
     }
-    
-    dispatch(rootActions.appAction.sendSearchRequest(identifier));
-  }, [searchIdentifier]);
+  }, [prevIdentifier]);
 
   return (
       <>
@@ -84,6 +84,7 @@ const SearchBar = () => {
               className={classes.iconButton}
               aria-label="search"
               onClick={handleSearch}
+              disabled={identifier? false: true}
           >
             <SearchIcon />
           </IconButton>

@@ -49,6 +49,11 @@ const SearchResults = (props) => {
 	const data = useSelector(state => {
 		return state.appReducer.searchResponse;
 	});
+
+	const searchIdentifier = useSelector(state => {
+		return state.appReducer.searchIdentifier;
+	});
+	
 	
 	const handleReleaseClick = (lidvid) => {
 		history.push("/release/" + lidvid);
@@ -80,9 +85,9 @@ const SearchResults = (props) => {
 	
 	const createTableCell = (status, doi, fieldValue) => {
 		if (status.toLowerCase() === 'registered')
-			return <TableCell>{createDoiLink(doi, fieldValue)}</TableCell>;
+			return createDoiLink(doi, fieldValue);
 		else
-			return <TableCell>{fieldValue}</TableCell>;
+			return fieldValue;
 	}
 	
 	const createDoiLink = (doi, fieldValue) => {
@@ -114,6 +119,7 @@ const SearchResults = (props) => {
 								:
 							<Typography className={classes.alignLeft}>{data.length} results found</Typography>
 						}
+
 						<TableContainer className={classes.tableContainer}>
 							<Table size="small" aria-label="a dense, sticky, paginated table" stickyHeader>
 								<TableHead className={classes.tableHeader}>
@@ -122,7 +128,7 @@ const SearchResults = (props) => {
 										<TableCell>Identifier</TableCell>
 										<TableCell>Title</TableCell>
 										<TableCell>Status</TableCell>
-										{props.showActions? <TableCell>Action</TableCell>:''}
+										{props.showActions? <TableCell>Action</TableCell> : ''}
 									</TableRow>
 								</TableHead>
 								<TableBody>
@@ -133,7 +139,7 @@ const SearchResults = (props) => {
 											data
 										).map((dataItem) => {
 											return (
-												<TableRow hover key={dataItem.lidvid}>
+												<TableRow hover key={dataItem.identifier}>
 												<TableCell>{determineDoiLink(dataItem.status, dataItem.doi)}</TableCell>
 												<TableCell>{determineDoiLink(dataItem.status, dataItem.doi, dataItem.identifier)}</TableCell>
 												<TableCell>{dataItem.title}</TableCell>
@@ -172,8 +178,8 @@ const SearchResults = (props) => {
 																return '-';
 														}
 													})()}</TableCell>
-													:
-													''
+												:
+												''
 												}
 												</TableRow>
 											);
@@ -197,8 +203,7 @@ const SearchResults = (props) => {
 					</div>
 				
 				:
-				<div>
-				</div>
+				''
 			}
 		</div>
 	)
