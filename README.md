@@ -37,5 +37,5 @@ For testing embeddable widgets run the script `npm run embeddev` This will run a
 
 For viewing the components in storybook run the script  `npm run storybook`. This will run a server with the components loaded into storybook.
 
-For testing the NPM package run the script `npm run npmbuild` Then run `npm link` you can then create a client app and import using `npm link <appname>`
+For testing the NPM package run the script `npm run npmbuild` Then run `npm link` you can then create a client app and import using `npm link pds-wds-react`
 
