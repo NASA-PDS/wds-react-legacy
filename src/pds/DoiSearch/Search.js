@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 const Search = (props) => {
   const classes = useStyles();
   return (
-    <Provider store={props.store? props.store : configureStore()}>
+    <Provider store={props.store? props.store : configureStore(props.api)}>
       <div className={classes.root}>
         <PageHeader header={'Search'} text={'Update an existing DOI by first locating it within our database using the search box below. ' +
         'Search by DOI, LID, LIDVID, or PDS3 Data Set ID.'}/>

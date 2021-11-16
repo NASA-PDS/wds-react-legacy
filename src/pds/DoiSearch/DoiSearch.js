@@ -8,12 +8,12 @@ const DoiSearch = (props) => {
       <Route 
         path="/search/:searchText+"
         render={(renderProps) => (
-          <Search {...renderProps} showActions={props.showActions} store={props.store}/>
+          <Search {...renderProps} showActions={props.showActions} store={props.store} api={props.api}/>
         )}
       />
       <Route path="/search/"
         render={(renderProps) => (
-          <Search {...renderProps} showActions={props.showActions} store={props.store}/>
+          <Search {...renderProps} showActions={props.showActions} store={props.store} api={props.api}/>
         )}
       />
       <Route path="/">

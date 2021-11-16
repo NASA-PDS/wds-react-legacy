@@ -6,8 +6,9 @@ TestApp.init({
   authId: 'xxxxxxx',
   apiKey: 'xxxxxxx',
 })
-console.log('TestApp Loaded!', TestApp)
+console.log('TestApp Loaded!', TestApp);
 
 DoiSearch.init({
+  api: 'http://localhost:8085/PDS_APIs/pds_doi_api/0.2/'
 })
-console.log('DoiSearch Loaded!', DoiSearch)
+console.log('DoiSearch Loaded!', DoiSearch);

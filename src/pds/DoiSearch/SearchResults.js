@@ -84,7 +84,7 @@ const SearchResults = (props) => {
 	}
 	
 	const createTableCell = (status, doi, fieldValue) => {
-		if (status.toLowerCase() === 'registered')
+		if (status.toLowerCase() === 'registered' ||  status.toLowerCase() === 'findable')
 			return createDoiLink(doi, fieldValue);
 		else
 			return fieldValue;
@@ -158,6 +158,15 @@ const SearchResults = (props) => {
 																		</Button>
 																);
 															case 'registered':
+																return (
+																		<Button color="primary"
+																						variant="contained"
+																						onClick={(event) => handleReleaseClick(dataItem.identifier)}
+																		>
+																			Update
+																		</Button>
+																);
+															case 'findable':
 																return (
 																		<Button color="primary"
 																						variant="contained"

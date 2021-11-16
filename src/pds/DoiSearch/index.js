@@ -7,7 +7,7 @@ export default {
   init: config => {
     if(document.getElementById(targetContainerId)){
         ReactDOM.render(
-            <DoiSearch/>,
+            <DoiSearch api={config.api}/>,
             document.getElementById(targetContainerId),
         )
     } 
