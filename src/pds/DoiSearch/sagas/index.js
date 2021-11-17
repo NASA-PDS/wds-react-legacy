@@ -48,19 +48,9 @@ function* sendSearch(api, action){
         endpoint += '?doi=' + encodeURIComponent(identifier);
     }
     else{
-        if(!identifier.startsWith('urn:nasa:pds:')) {
-            let searchIdentifier = identifier.replace(/\//g, '-') + '*';
-            identifier = '*' + searchIdentifier;
-            endpoint += '?ids=' + encodeURIComponent(identifier);
-        }
-        else{
-            isSingleResult = true;
-            endpoint = Config.api + 'doi';
-            if(api){
-                endpoint = api + 'doi';
-            }
-            endpoint += '?identifier=' + encodeURIComponent(identifier);
-        }
+        let searchIdentifier = identifier.replace(/\//g, '-') + '*';
+        identifier = '*' + searchIdentifier;
+        endpoint += '?ids=' + encodeURIComponent(identifier);
     }
     
     const response = yield call(fetch, endpoint);

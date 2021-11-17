@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
 	alignLeft: {
 		textAlign: 'left',
 		alignSelf: 'flex-start'
+	},
+	fillWidth: {
+		width: '100%'
 	}
 }));
 
@@ -106,7 +109,7 @@ const SearchResults = (props) => {
 	};
 
 	return (
-		<div>
+		<div className={classes.fillWidth}>
 			{data ?
 				data.errors ?
 					<Alert icon={false} severity="error" className={classes.alert}>
