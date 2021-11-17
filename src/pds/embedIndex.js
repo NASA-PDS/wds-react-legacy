@@ -8,7 +8,17 @@ TestApp.init({
 })
 console.log('TestApp Loaded!', TestApp);
 
+
+let api;
+if(document.getElementById('DoiSearch')){
+  if(document.getElementById('DoiSearch').dataset.api){
+    api = document.getElementById('DoiSearch').dataset.api;
+  }
+}
+
 DoiSearch.init({
-  api: 'http://localhost:8085/PDS_APIs/pds_doi_api/0.2/'
+  api: api
 })
 console.log('DoiSearch Loaded!', DoiSearch);
+
+
