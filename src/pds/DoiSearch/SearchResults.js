@@ -13,6 +13,7 @@ import rootActions from "./actions/rootActions";
 import {Alert} from "@material-ui/lab";
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom'
+import Popover from '@material-ui/core/Popover';
 
 const useStyles = makeStyles((theme) => ({
 	alert: {
@@ -41,13 +42,33 @@ const useStyles = makeStyles((theme) => ({
 	},
 	fillWidth: {
 		width: '100%'
-	}
+	},
+	popover: {
+		pointerEvents: 'none',
+	},
+	paper: {
+		padding: theme.spacing(1),
+	},
 }));
 
 const SearchResults = (props) => {
 	const history = useHistory();
 	const classes = useStyles();
 	const dispatch = useDispatch();
+	const [anchorEl, setAnchorEl] = useState(null);
+	const [popoverMessage, setPopoverMessage] = useState(null);
+
+	const handlePopoverOpen = (event) => {
+		let popoverMessage = getStatusPopoverMessage(event.currentTarget.innerHTML);
+		setPopoverMessage(popoverMessage);
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null);
+	};
+
+  	const open = Boolean(anchorEl);
 
 	const data = useSelector(state => {
 		return state.appReducer.searchResponse;
@@ -77,6 +98,19 @@ const SearchResults = (props) => {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	};
 
+	const getStatusPopoverMessage = (string) => {
+		string = string.toLowerCase();
+		if(string === "findable"){
+			return 'This DOI can be found at doi.org';
+		}
+		else if(string === "registered"){
+			return 'This DOI has been registered but not yet released';
+		}
+		else{
+			return '';
+		}
+	}
+
 	const determineDoiLink = (status, doi, fieldValue) => {
 		if (typeof fieldValue == 'undefined') { // field is DOI
 			if (doi) return createTableCell(status, doi, doi);
@@ -87,7 +121,7 @@ const SearchResults = (props) => {
 	}
 	
 	const createTableCell = (status, doi, fieldValue) => {
-		if (status.toLowerCase() === 'registered' ||  status.toLowerCase() === 'findable')
+		if (status.toLowerCase() === 'findable')
 			return createDoiLink(doi, fieldValue);
 		else
 			return fieldValue;
@@ -117,6 +151,30 @@ const SearchResults = (props) => {
 					</Alert>
 					:
 					<div>
+						<Popover
+							id="mouse-over-popover"
+							className={classes.popover}
+							classes={{
+								paper: classes.paper,
+							}}
+							open={open}
+							anchorEl={anchorEl}
+							anchorOrigin={{
+								vertical: 'bottom',
+								horizontal: 'left',
+							}}
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'left',
+							}}
+							onClose={handlePopoverClose}
+							disableRestoreFocus
+						>
+							<Typography>
+								{popoverMessage}
+							</Typography>
+						</Popover>
+
 						{data.length === 1 ?
 							<Typography className={classes.alignLeft}>1 result found</Typography>
 								:
@@ -146,7 +204,21 @@ const SearchResults = (props) => {
 												<TableCell>{determineDoiLink(dataItem.status, dataItem.doi)}</TableCell>
 												<TableCell>{determineDoiLink(dataItem.status, dataItem.doi, dataItem.identifier)}</TableCell>
 												<TableCell>{dataItem.title}</TableCell>
-												<TableCell>{massageStatus(dataItem.status.toLowerCase())}</TableCell>
+												<TableCell>
+													{	
+														<div>
+															<Typography
+																aria-owns={open ? 'mouse-over-popover' : undefined}
+																aria-haspopup="true"
+																onMouseEnter={handlePopoverOpen}
+																onMouseLeave={handlePopoverClose}
+																value="ely"
+															>
+																{massageStatus(dataItem.status.toLowerCase())}
+															</Typography>
+														</div>
+													}
+												</TableCell>
 												{props.showActions?
 													<TableCell>{(() => {
 														switch (dataItem.status.toLowerCase()) {
