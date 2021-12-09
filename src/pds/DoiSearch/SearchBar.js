@@ -62,8 +62,16 @@ const SearchBar = () => {
     history.replace("/search/");
   };
 
+  const trim = (searchText) => {
+    if(searchText && searchText.length > 0){
+      searchText = searchText.trim();
+    }
+    return searchText;
+  };
+
   useEffect(() => {
     if(searchText){
+      searchText = trim(searchText);
       setIdentifier(searchText);
       dispatch(rootActions.appAction.sendSearchRequest(searchText));
     }
