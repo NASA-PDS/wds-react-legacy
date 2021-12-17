@@ -1,4 +1,4 @@
-# NASA PDS Incubator PDS Design System
+# NASA PDS Web Design System
 The PDS design system leverages Google’s [Material](https://material.io/design) design system to create an adaptable design system of guidelines and stylings that feel distinctly PDS.
 
 ## How To Use The PDS Design System
