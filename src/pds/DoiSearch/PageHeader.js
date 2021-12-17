@@ -24,7 +24,7 @@ const PageHeader = (props) => {
           Search for a DOI or PDS Data Set, Bundle, Collection, or Document products using a DOI or PDS LID, LIDVID, or PDS3 Data Set ID. 
         </Typography>
         <Typography variant="body1" className={classes.fullWidth}>
-          See the <Link href="https://pds-gamma.jpl.nasa.gov/datastandards/citing/" target="_blank" rel="noopener">Citing PDS4</Link> Data page for more information on how to use these DOIs to cite PDS data.
+            See the <Link href="/datastandards/citing/" target="_blank" rel="noopener">Citing PDS</Link> Data page for more information on how to use these DOIs to cite PDS data.
         </Typography>
         <br/>
         <Typography variant="body1" className={classes.fullWidth} gutterBottom>
