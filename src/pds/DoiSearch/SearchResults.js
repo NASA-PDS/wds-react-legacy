@@ -74,6 +74,10 @@ const SearchResults = (props) => {
 		return state.appReducer.searchResponse;
 	});
 
+	const parentData = useSelector(state => {
+		return state.appReducer.parentSearchResponse;
+	});
+
 	const searchIdentifier = useSelector(state => {
 		return state.appReducer.searchIdentifier;
 	});
@@ -146,9 +150,134 @@ const SearchResults = (props) => {
 		<div className={classes.fillWidth}>
 			{data ?
 				data.errors ?
-					<Alert icon={false} severity="error" className={classes.alert}>
-						{data.errors[0].message}
-					</Alert>
+					<div>
+						<Alert icon={false} severity="error" className={classes.alert}>
+							{data.errors[0].message}
+						</Alert>
+						{parentData && parentData.length > 0?
+							<div>
+								<br/>
+								<Typography variant="h6">
+									Parent Data Set DOI(s)
+								</Typography>
+								<div>
+									<Popover
+										id="mouse-over-popover2"
+										className={classes.popover}
+										classes={{
+											paper: classes.paper,
+										}}
+										open={open}
+										anchorEl={anchorEl}
+										anchorOrigin={{
+											vertical: 'bottom',
+											horizontal: 'left',
+										}}
+										transformOrigin={{
+											vertical: 'top',
+											horizontal: 'left',
+										}}
+										onClose={handlePopoverClose}
+										disableRestoreFocus
+									>
+										<Typography>
+											{popoverMessage}
+										</Typography>
+									</Popover>
+
+									<TableContainer className={classes.tableContainer}>
+										<Table size="small" aria-label="a dense, sticky, paginated table" stickyHeader>
+											<TableHead className={classes.tableHeader}>
+												<TableRow>
+													<TableCell>DOI</TableCell>
+													<TableCell>Identifier</TableCell>
+													<TableCell>Title</TableCell>
+													<TableCell>Status</TableCell>
+													{props.showActions? <TableCell>Action</TableCell> : ''}
+												</TableRow>
+											</TableHead>
+											<TableBody>
+												{
+													parentData.map((dataItem) => {
+														return (
+															<TableRow hover key={dataItem.identifier}>
+															<TableCell>{determineDoiLink(dataItem.status, dataItem.doi)}</TableCell>
+															<TableCell>{determineDoiLink(dataItem.status, dataItem.doi, dataItem.identifier)}</TableCell>
+															<TableCell>{dataItem.title}</TableCell>
+															<TableCell>
+																{	
+																	<div>
+																		<Typography
+																			aria-owns={open ? 'mouse-over-popover' : undefined}
+																			aria-haspopup="true"
+																			onMouseEnter={handlePopoverOpen}
+																			onMouseLeave={handlePopoverClose}
+																			value="ely"
+																		>
+																			{massageStatus(dataItem.status.toLowerCase())}
+																		</Typography>
+																	</div>
+																}
+															</TableCell>
+															{props.showActions?
+																<TableCell>{(() => {
+																	switch (dataItem.status.toLowerCase()) {
+																		case 'draft':
+																		case 'reserved':
+																			return (
+																					<Button color="primary"
+																									variant="contained"
+																									onClick={(event) => handleReleaseClick(dataItem.identifier)}
+																					>
+																						Release
+																					</Button>
+																			);
+																		case 'registered':
+																			return (
+																					<Button color="primary"
+																									variant="contained"
+																									onClick={(event) => handleReleaseClick(dataItem.identifier)}
+																					>
+																						Update
+																					</Button>
+																			);
+																		case 'findable':
+																			return (
+																					<Button color="primary"
+																									variant="contained"
+																									onClick={(event) => handleReleaseClick(dataItem.identifier)}
+																					>
+																						Update
+																					</Button>
+																			);
+																		case 'review':
+																			return (
+																					<Button disabled
+																									variant="contained"
+																					>
+																						Pending
+																					</Button>
+																			);
+																		default:
+																			return '-';
+																	}
+																})()}</TableCell>
+															:
+															''
+															}
+															</TableRow>
+														);
+													})
+												}
+											</TableBody>
+										</Table>
+									</TableContainer>
+									</div>
+								</div>
+							:
+							''
+						}
+					</div>
 					:
 					<div>
 						<Popover

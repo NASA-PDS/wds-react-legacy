@@ -13,6 +13,7 @@ const initialState = {
   searchClear: true,
   searchIdentifier: null,   // doi, lidvid, or partial
   searchResponse: null,
+  parentSearchResponse: null,
   submitter: "",
   node: null
 }
@@ -43,7 +44,8 @@ export default (state = initialState, action) => {
         ...state,
         searchClear: false,
         searchIdentifier: action.payload.identifier,
-        searchResponse: action.payload.data
+        searchResponse: action.payload.data,
+        parentSearchResponse: action.payload.parentData
       }
     case 'RESET_SEARCH':
       return {
