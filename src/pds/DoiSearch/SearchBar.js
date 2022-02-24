@@ -28,10 +28,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SearchBar = () => {
-  let { searchText } = useParams();
-  const history = useHistory();
+const SearchBar = (props) => {
   const classes = useStyles();
+  let searchText;
+  let history;
+
+  if(props.useClientRouter){
+    searchText = props.searchText;
+    history = props.history;
+  }
+  else{
+    searchText = useParams()['searchText'];
+    history = useHistory();
+  }
+
   const dispatch = useDispatch();
   const [identifier, setIdentifier] = useState('');
   let [prevIdentifier, setPrevIdentifier] = useState(0);

@@ -30,6 +30,7 @@ let theme = createTheme();
 
 const Search = (props) => {
   const classes = useStyles();
+
   return (
     <StylesProvider generateClassName={generateClassName}>
       <MuiThemeProvider theme={theme}>
@@ -38,8 +39,17 @@ const Search = (props) => {
           <Provider store={props.store? props.store : configureStore(props.api)}>
             <div className={classes.root}>
               <PageHeader header={''} text={''}/>
-              <SearchBar />
-              <SearchResults showActions={props.showActions}/>
+             
+              <SearchBar 
+                useClientRouter={props.useClientRouter} 
+                history={props.history} 
+                searchText={props.searchText}
+              />
+              <SearchResults 
+                useClientRouter={props.useClientRouter}  
+                history={props.history} 
+                showActions={props.showActions}
+              />
             </div>
           </Provider>
 

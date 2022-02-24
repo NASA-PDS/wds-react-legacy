@@ -52,8 +52,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchResults = (props) => {
-	const history = useHistory();
 	const classes = useStyles();
+	let history;
+
+	if(props.useClientRouter){
+		history = props.history;
+		}
+	  else{
+		history = useHistory();
+	  }
+	
 	const dispatch = useDispatch();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [popoverMessage, setPopoverMessage] = useState(null);
