@@ -12,7 +12,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import rootActions from "./actions/rootActions";
 import {Alert} from "@material-ui/lab";
 import Typography from '@material-ui/core/Typography';
-import { useHistory } from 'react-router-dom'
 import Popover from '@material-ui/core/Popover';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,14 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchResults = (props) => {
 	const classes = useStyles();
-	let history;
-
-	if(props.useClientRouter){
-		history = props.history;
-		}
-	  else{
-		history = useHistory();
-	  }
+	let history = props.history;
 	
 	const dispatch = useDispatch();
 	const [anchorEl, setAnchorEl] = useState(null);

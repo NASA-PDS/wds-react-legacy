@@ -38,18 +38,22 @@ const Search = (props) => {
 
           <Provider store={props.store? props.store : configureStore(props.api)}>
             <div className={classes.root}>
+              <p>pds-wsd-react search props.history: { JSON.stringify(props.history)}</p>
+              <p>pds-wsd-react search props.params: {JSON.stringify(props.params)}</p>
+
               <PageHeader header={''} text={''}/>
-             
-              <SearchBar 
-                useClientRouter={props.useClientRouter} 
+              
+              <SearchBar
                 history={props.history} 
-                searchText={props.searchText}
+                params={props.params}
               />
-              <SearchResults 
-                useClientRouter={props.useClientRouter}  
+
+              <SearchResults
+                showActions={props.showActions} 
                 history={props.history} 
-                showActions={props.showActions}
+                params={props.params}
               />
+
             </div>
           </Provider>
 
