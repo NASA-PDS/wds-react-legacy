@@ -1,6 +1,6 @@
 {
   "name": "@nasapds/pds-wds-react",
-  "version": "0.0.2-beta.2",
+  "version": "0.0.2-beta.3",
   "description": "PDS widget library for react and embeddable js",
   "main": "build/index.js",
   "author": "PDS",
