@@ -1,0 +1,71 @@
+:root {
+  --reactwidget__container_zindex: 100000;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100%;
+}
+
+#reactWidget__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--reactWidget__container_zIndex) !important;
+}
+#reactWidget__container * {
+  z-index: var(--reactWidget__container_zIndex) !important;
+}
+
+.reactWidget__secondary_container > * {
+  z-index: var(--reactWidget__container_zIndex) !important;
+}
+.reactWidget__secondary_container {
+  background-color: #ffffff;
+  color: #424242;
+  box-sizing: border-box;
+}
+
+#demo-widget {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 12px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#demo-widget:hover .top {
+  border: 0.5em solid #e74c3c;
+}
+
+#demo-widget:hover .top:after {
+  border-top: 0.5em solid #e74c3c;
+  border-right: 0.5em solid #e74c3c;
+}
+
+#demo-widget .top {
+  display: inline-block;
+  width: 4em;
+  height: 4em;
+  border: 0.5em solid #333;
+  border-radius: 50%;
+  margin-right: 0.75em;
+}
+
+#demo-widget .top:after {
+  content: '';
+  display: inline-block;
+  margin-top: 1.4em;
+  width: 1.4em;
+  height: 1.4em;
+  border-top: 0.5em solid #333;
+  border-right: 0.5em solid #333;
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}

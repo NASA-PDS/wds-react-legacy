@@ -1,142 +1,72 @@
-# NASA PDS Web Design System
-The PDS design system leverages Google’s [Material](https://material.io/design) design system to create an adaptable design system of guidelines and stylings that feel distinctly PDS.
+# pds-wds-react
+A library of Planetary Data System web widgets and components in react.
 
-## How To Use The PDS Design System
-The PDS design system provides a theme that can be added on top of Material.
+## Installation
+`npm i @nasapds/pds-wds-react`
 
-### Usage In React Applications
-There are 3 steps to installing and using the PDS design system in react. The first is to install Material UI. Second is to apply the PDS theme. Third is to change existing HTML tags into Material components.
+## Usage
 
-Material UI makes installing or updating an existing react application with Material design as simple as possible. Most of the information written here can be found on the Material UI website at: https://material-ui.com but it will be condensed here for practicality.
+### In React Doi Search Widget
+Import the Doi Search into your component.
+`import {DoiSearch} from 'pds-wds-react';`
 
-This section is for react applications built with react-app. https://reactjs.org/docs/create-a-new-react-app.html
+Then include the component in your react render code.
+`<DoiSearch/>`
 
-This information was written as of July 2020. Reference links will be included to the latest on Material UI.
+Parameters:
+`showActions` This is a boolean that will hide or show action buttons with each search result. This is defaulted to false.
+`useClientRouter` This is a boolean that when set to true will disable the widget's internal react-router. This is defaulted to false. Set this to true if your app uses react-router.
+`history` This is a history object from react-router. If your app uses react-router pass the history here. By default this is null.
+`store` This is a redux store object. If you want to customize the behavior of the widget action buttons or the call process you can pass through your own store. By default this is null.
 
-#### 1) Install Material UI
-Use npm to install the Material IU core into an existing react application. This will include all the components such as Button, Container, Slider and App Bar.
+### As Embeddable JS Doi Search
+In your project create a directory for example:
+`pds-widgets/`
 
-`npm install @material-ui/core`
+Drop the contents of the `/embedbuild` directory into the newly created directory.
 
-Some components are still at an experimental stage and are installed separately in a package called Lab. If Alerts, Autocomplete and Pagination are going to be used in an application install this package as well.
+Add a div with the ID of the component set as `DoiSearch`.
+`<div id="DoiSearch"></div>`
 
-`npm install @material-ui/lab`
+Link the library into your project HTML using the script tag. Change the directory to the one that you created.
+`<script src="pds-widgets/index.js"></script>`
 
-Core reference: https://material-ui.com/getting-started/installation/
+Parameters
+`data-api` Point this to your doi api. It is set to localhost 8080 by default.
 
-The full list of Lab components can be found here: https://material-ui.com/components/about-the-lab/
+## Code Base Development Instructions
 
-#### 2) Override The Default Theme
-##### a) Create A Theme File
-Material UI has a default set of typographies, colors, spacings and transitions. These can all be found at: https://material-ui.com/customization/default-theme/#default-theme
+### Source
+Clone this repository into your workspace first.
 
-In order to override these default styles and use them throughout the application a theme file must be created which will then be passed into a Theme Provider.
+The components are found inside `/src/pds/`
 
-A theme is generated using createMuiTheme(). In order to use it we create a Theme.js file with the following content. 
+Each component has an index.js and a <name>.js file.
+`index.js` is for building the embeddable js widget.
+`<name>.js` is for building the npm package.
 
-```javascript
-import { createMuiTheme } from '@material-ui/core/styles';
+There are three index files inside `/src/pds/` that need to be updated with an import of a new component when one is created. These are `embedBuildIndex.js`, `embedIndex.js` and `npmBuildIndex.js`
 
-const Theme = createMuiTheme({
-    palette: {
-        primary:{
-            main: "cccccc"
-        },
-        secondary:{
-            main: "#FF0000"
-        }
-    }
-});
+### Development Scripts
+For testing embeddable widgets run the script `npm run embeddev` This will run a server with `/public/embedIndex.html` as the entry point. You can update this file to show the component that you want to test.
 
-export default Theme;
-```
+For testing the NPM package run the script `npm run npmbuild` Then run `npm link` you can then create a client app and import using `npm link pds-wds-react`
 
-Any values that override the values at https://material-ui.com/customization/default-theme/#default-theme will then be used throughout the application. In this example we did an override of the palette section’s primary and secondary colors. Any component that uses color=“primary” will now be a light gray and color=“secondary” will be red.
+Import the component into your client app using the Usage section.
 
-In a similar fashion any of the values that Material UI contains in its [default](https://material-ui.com/customization/default-theme/#default-theme) theme can be overridden.
+There are sometimes problems with multiple instances of react caused by npm link. If this happens, delete `node_modules/react` inside the pds-wds-react source. Then stop and restart the client test app again.
 
-This theme file is where the content from the theme file provided by the PDS will be placed.
+## Building
+`npm run build`
+Two directories will be created `/build` and `/embedbuild`.
 
-##### b) Pass The Theme File Into A Theme Provider
-In order to use the theme file a Theme Provider must be used. The theme provider is included in the core package “@material-ui/core/styles’ The simplest way to use it is to wrap it around your app component and pass it the theme file. This can be done in your index.js file. 
+`/build` will the contain the ready to deploy npm files. This is what is deployed to the NPM JS website.
 
-Once there it can be used throughout your application.
+`/embedbuild` will contain the ready to deploy embeddable widget files. This is what can be dropped into a website that is not built with React.
 
-In a simple application the following will suffice.
-```javascript
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
-import Theme from './Theme';
-import App from './App';
+### Publishing to NPM
+Update the version in the `/package.json` file.
 
-ReactDOM.render(
-    <ThemeProvider theme={Theme}>
-        <App />
-    </ThemeProvider>,
-    rootElement
-);
-```
+Use the `X.X.X` semver syntax to set a version or `X.X.X-beta.X` semver syntax for a beta version.
 
-If you are using Redux or Browser Router the theme provider can be wrapped around those For example here we wrap a theme provider over a redux store and a browser router. 
-```javascript
-import React from 'react';
-import ReactDOM from 'react-dom’;
-import App from './App';
-import { Provider } from 'react-redux';
-import configureStore from './store';
-import { BrowserRouter, Route } from 'react-router-dom'
-import { ThemeProvider } from '@material-ui/core/styles';
-import Theme from './Theme';
-
-ReactDOM.render(
-    <ThemeProvider theme={Theme}>
-        <Provider store={configureStore()}>
-            <BrowserRouter basename=“/app”>
-                <Route path="/" component={App}/>
-            </BrowserRouter>
-        </Provider>
-    </ThemeProvider>,
-    document.getElementById('root')
-);
-```
-
-More details and examples for Theme Provider can be found here: https://material-ui.com/styles/api/ in the theme provider section.
-
-#### 3) Use Material UI Components
-Using a component from Material UI is as simple as copy pasting the code from the desired component in the components section of the documents on the material ui site. https://material-ui.com/components/box/
-
-There is however one thing to be aware of. Several HTML elements in order to accept Material UI’s props and theming must be replaced with a component. For example a `<span>` would be better declared with Material UI’s “Box” component then given the prop component=“span”.
-
-For example use:
-
-```HTML
-<Box component=“span”>
-  <Button />
-</Box>
-```
-Instead of:
-
-```HTML
-<span>
-  <button/>
-</span>
-```
-
-This allows the API for the specific component to be used and the theme styles to be applied. If a normal span is used then it will not receive the styling from the theme.
-
-In an existing application in order to get the stylings from the theme file some of these HTML elements must be changed to Material UI’s components. The entire application does not need to be rewritten just the parts that need to have the theme stylings. For a new application try using the corresponding Material UI component instead of the html tag.
-
-This is an example table of conversions that can be made:
-HTML Tag | Corresponding Material-UI Component
------------- | -------------
-div | Box
-span | Box
-button | Button
-`<input type=“checkbox”>` | Checkbox
-`<input type=“radio”>` | Radio
-select | Select
-input, textarea | TextField
-a | Link
-table | Table
-h1,h2,h3,h4,h5,h6 | Typography
+Use `npm publish` to publish a stable version or use `npm publish --tag beta` to publish a beta version.
