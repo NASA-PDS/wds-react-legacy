@@ -2,9 +2,20 @@ import React from 'react';
 import PageHeader from "./PageHeader";
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
-import {makeStyles} from "@material-ui/core/styles";
 import { Provider } from 'react-redux';
 import configureStore from './store';
+import {
+  makeStyles,
+  MuiThemeProvider,
+  ThemeProvider,
+  StylesProvider,
+  createGenerateClassName,
+  createTheme
+} from '@material-ui/core/styles';
+
+const generateClassName = createGenerateClassName({
+  seed: 'doi-search',
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,16 +26,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+let theme = createTheme();
+
 const Search = (props) => {
   const classes = useStyles();
+
   return (
-    <Provider store={props.store? props.store : configureStore(props.api)}>
-      <div className={classes.root}>
-        <PageHeader header={''} text={''}/>
-        <SearchBar />
-        <SearchResults showActions={props.showActions}/>
-      </div>
-    </Provider>
+    <StylesProvider generateClassName={generateClassName}>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+
+          <Provider store={props.store? props.store : configureStore(props.api)}>
+            <div className={classes.root}>
+
+              <PageHeader header={''} text={''}/>
+              
+              <SearchBar
+                history={props.history} 
+                params={props.params}
+              />
+
+              <SearchResults
+                showActions={props.showActions} 
+                history={props.history} 
+                params={props.params}
+              />
+
+            </div>
+          </Provider>
+
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </StylesProvider>
   )
 };
 

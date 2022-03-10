@@ -7,7 +7,6 @@ import ClearIcon from "@material-ui/icons/Clear";
 import SearchIcon from "@material-ui/icons/Search";
 import {useDispatch, useSelector} from "react-redux";
 import rootActions from "./actions/rootActions";
-import { useHistory, useParams } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {
@@ -28,10 +27,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SearchBar = () => {
-  let { searchText } = useParams();
-  const history = useHistory();
+const SearchBar = (props) => {
   const classes = useStyles();
+  let searchText = props.params['searchText'];
+  let history = props.history;
+
   const dispatch = useDispatch();
   const [identifier, setIdentifier] = useState('');
   let [prevIdentifier, setPrevIdentifier] = useState(0);
