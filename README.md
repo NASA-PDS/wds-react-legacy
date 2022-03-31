@@ -2,28 +2,33 @@
 A library of Planetary Data System web widgets and components in react.
 
 ## Installation
-`npm i @nasapds/pds-wds-react`
+
+Run in a terminal:
+
+    npm i @nasapds/pds-wds-react
 
 ## Usage
 
 ### Doi Search Widget In React
-Import the Doi Search into your component.
-`import {DoiSearch} from 'pds-wds-react';`
+Import the Doi Search into your component:
 
-Then include the component in your react render code.
-`<DoiSearch/>`
+    import {DoiSearch} from 'pds-wds-react';
 
-Parameters:
+Then include the component in your react render code:
 
-`api` The endpoint to search. By default this is pointing to http://localhost:8085/PDS_APIs/pds_doi_api/0.2/
+    <DoiSearch api="{api}" ... />
 
-`showActions` Hides or shows action buttons next to each search result. False by default.
+**Parameters:**
 
-`useClientRouter` If set to true will disable the widget's internal react-router. Set this to true if your app uses react-router. False by default.
+- `api` The endpoint to the search API. By default this is pointing to http://localhost:8085/PDS_APIs/pds_doi_api/0.2/
 
-`history` A history object from react-router. If your app uses react-router pass the history here. Null by default.
+- `showActions` Hides or shows action buttons next to each search result. False by default.
 
-`store` A Redux store object. If you want to customize the behavior of the widget action buttons or the call process you can pass your own store. This is null by default.
+- `useClientRouter` If set to true will disable the widget's internal react-router. Set this to true if your app uses react-router. False by default.
+
+- `history` A history object from react-router. If your app uses react-router pass the history here. Null by default.
+
+- `store` A Redux store object. If you want to customize the behavior of the widget action buttons or the call process you can pass your own store. This is null by default.
 
 In react the doi search could look like this with the parameters changed:
 
@@ -37,19 +42,22 @@ In react the doi search could look like this with the parameters changed:
 
 ### Doi Search Widget As Embeddable JS
 In your project create a directory for example:
-`pds-widgets/`
+
+    pds-widgets/
 
 Drop the contents of the `/embedbuild` directory into the newly created directory.
 
-Add a div with the ID of the component set as `DoiSearch`.
-`<div id="DoiSearch"></div>`
+Link the library into your project HTML using the script tag. Change the directory to the one that you created:
 
-Link the library into your project HTML using the script tag. Change the directory to the one that you created.
-`<script src="pds-widgets/index.js"></script>`
+    <script src="pds-widgets/index.js"></script>
 
-Parameters
+Add a div with the ID of the component set as `DoiSearch`:
 
-`data-api` Point this to your doi api. It is set to localhost 8085 by default.
+    <div id="DoiSearch"></div>
+
+**Parameters:**
+
+- `data-api` Point this to your doi api. It is set to localhost 8085 by default.
 
 
 In your html page the doi search could look like this with the parameters changed:
@@ -57,9 +65,11 @@ In your html page the doi search could look like this with the parameters change
 ```javascript
 `<div id="DoiSearch" data-api='http//localhost:8085/PDS_APIs/pds_doi_api/0.2/'></div>`
 ```
+
 ## Code Base Development Instructions
 
 ### Source
+
 Clone this repository into your workspace first.
 
 The components are found inside `/src/pds/`
