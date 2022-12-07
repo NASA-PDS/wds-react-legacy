@@ -1,5 +1,9 @@
 import { createTheme } from '@mui/material/styles';
 
+const { palette } = createTheme();
+const { augmentColor } = palette;
+const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
+
 const pdsTheme = createTheme({
     palette: {
         type: 'light',
@@ -9,6 +13,8 @@ const pdsTheme = createTheme({
         secondary: {
             main: '#0B3D91',
         },
+        red: createColor('#F64137'),
+        geo: createColor('#f1d3a7'),
         text: {
             primary: '#000000',
         },

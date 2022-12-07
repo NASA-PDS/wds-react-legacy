@@ -19,6 +19,12 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import EastIcon from '@mui/icons-material/East';
 import Badge from '@mui/material/Badge';
+import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip';
+import Button from '@mui/material/Button';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import Stack from '@mui/material/Stack';
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
   '& label.Mui-focused': {
@@ -83,6 +89,7 @@ const Content = () => {
   const onCardMouseOver = () => {
     setIsCardHovered(true);
   }
+
   const onCardMouseOut = () => {
     setIsCardHovered(false);
   }
@@ -125,7 +132,8 @@ const Content = () => {
               fullWidth
             />
 
-            <p>sorting buttons</p>
+            <p>sorting buttons go here</p>
+            
             <div>
               {show? 
                 <Card 
@@ -192,11 +200,53 @@ const Content = () => {
               }
 
               <p>
-              This is where the results will go. For now it connects to localhost so it will fail and return nothing.
-              </p>
-              <p>
                 This is the search text: {JSON.stringify(searchText)}
               </p>
+
+              <Paper elevation={0}>
+                
+              {searchResults.data?
+                searchResults.data.map((result) => (
+                  <Box>
+                    <Grid container spacing={2}>
+                      <Grid item xs={6}>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                          <ArrowRightIcon/>
+                          <Typography variant="subtitle2" display="inline">
+                            {result.title}
+                          </Typography>
+                        </Stack>
+                      </Grid>
+                      <Grid item xs={2}>
+                        <Chip label="GEO" color="geo" />
+                      </Grid>
+                      <Grid item xs={2}>
+                        <Typography variant="button" display="block">
+                          DATA
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={2}>
+                        <Button variant="contained" color="red">Visit</Button>
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                      <Stack direction="row" alignItems="center" gap={1}>
+                          <ArrowRightIcon sx={{visibility: "hidden"}}/>
+                          <Typography variant="body1" gutterBottom>
+                            {result.type}
+                          </Typography>
+                        </Stack>
+                      </Grid>
+                    </Grid>
+                    <Divider/>
+                  </Box>
+                ))
+                :
+                ""
+              }
+              </Paper>
+              
 
               <p>Search Response: {JSON.stringify(searchResults)}</p>
 
