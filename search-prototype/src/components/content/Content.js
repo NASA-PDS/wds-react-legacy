@@ -25,6 +25,8 @@ import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Stack from '@mui/material/Stack';
+import StarsIcon from '@mui/icons-material/Stars';
+import IconButton from '@mui/material/IconButton';
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
   '& label.Mui-focused': {
@@ -206,42 +208,52 @@ const Content = () => {
               <Paper elevation={0}>
                 
               {searchResults.data?
-                searchResults.data.map((result) => (
+                <div>
                   <Box>
                     <Grid container spacing={2}>
-                      <Grid item xs={6}>
-                        <Stack direction="row" alignItems="center" gap={1}>
-                          <ArrowRightIcon/>
-                          <Typography variant="subtitle2" display="inline">
-                            {result.title}
-                          </Typography>
-                        </Stack>
+                      <Grid item xs={9}>
+                        <Typography>Result</Typography>
                       </Grid>
-                      <Grid item xs={2}>
-                        <Chip label="GEO" color="geo" />
-                      </Grid>
-                      <Grid item xs={2}>
-                        <Typography variant="button" display="block">
-                          DATA
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <Button variant="contained" color="red">Visit</Button>
+                      <Grid item xs={3}>
+                        <Typography>Category</Typography>
                       </Grid>
                     </Grid>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                      <Stack direction="row" alignItems="center" gap={1}>
-                          <ArrowRightIcon sx={{visibility: "hidden"}}/>
-                          <Typography variant="body1" gutterBottom>
-                            {result.type}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                    </Grid>
-                    <Divider/>
                   </Box>
-                ))
+
+                  {searchResults.data.map((result) => (
+                    <Box>
+                      <Grid container spacing={2} alignItems="center">
+                        <Grid item xs={1}>
+                          <IconButton aria-label="arrow">
+                            <StarsIcon />
+                          </IconButton>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Stack alignItems="left" gap={1}>
+                            <Typography variant="subtitle2" display="inline">
+                              {result.title}
+                            </Typography>
+                            <Typography variant="body1" gutterBottom>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor*
+                            </Typography>
+                          </Stack>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Typography variant="body1" display="block" color='red'>
+                            DATA*
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={1}>
+                          <IconButton aria-label="arrow" color="red">
+                            <StarsIcon />
+                          </IconButton>
+                        </Grid>
+                      </Grid>
+
+                      <Divider/>
+                    </Box>
+                  ))}
+                </div>
                 :
                 ""
               }
@@ -255,6 +267,7 @@ const Content = () => {
                 Edit <code>src/App.js</code> and save to reload.
                 
               </p>
+              
               <a
                 className="App-link"
                 href="https://reactjs.org"
@@ -263,6 +276,11 @@ const Content = () => {
               >
                 Learn React
               </a>
+
+              <Grid style={{ display: "flex" }}>
+                  <Typography>Revolve</Typography>
+              </Grid>
+              
             </div>
           </Grid>
         </Grid>
