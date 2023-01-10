@@ -16,14 +16,9 @@ import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import EastIcon from '@mui/icons-material/East';
-import Badge from '@mui/material/Badge';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
-import Button from '@mui/material/Button';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Stack from '@mui/material/Stack';
 import StarsIcon from '@mui/icons-material/Stars';
 import IconButton from '@mui/material/IconButton';
@@ -60,6 +55,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 const Content = () => {
   const [addRequestStatus, setAddRequestStatus] = useState('idle');
   const [isCardHovered, setIsCardHovered] = useState(false);
+  const [resultDetailsClickedIndex, setResultDetailsClickedIndex] = useState({});
 
   const dispatch = useDispatch();
   let show = false;
@@ -79,6 +75,7 @@ const Content = () => {
       console.error('Failed to save the post: ', err);
     } finally {
       setAddRequestStatus('idle');
+      setResultDetailsClickedIndex({});
     }
   }
 
@@ -94,6 +91,13 @@ const Content = () => {
 
   const onCardMouseOut = () => {
     setIsCardHovered(false);
+  }
+
+  const handleResultDetailsClick = (index) => () => {
+    setResultDetailsClickedIndex(state => ({
+      ...state,
+      [index]: !state[index]
+    }));
   }
   
   return (
@@ -116,11 +120,11 @@ const Content = () => {
 
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid xs={4}>
+          <Grid xs={3}>
             <p>Showing ____ for _____</p>
             <p>facets list goes here:</p>
           </Grid>
-          <Grid xs={8}>
+          <Grid xs={9}>
 
             <CustomTextField
               id="outlined-start-adornment2"
@@ -220,11 +224,11 @@ const Content = () => {
                     </Grid>
                   </Box>
 
-                  {searchResults.data.map((result) => (
+                  {searchResults.data.map((result, index) => (
                     <Box>
                       <Grid container spacing={2} alignItems="center">
                         <Grid item xs={1}>
-                          <IconButton aria-label="arrow">
+                          <IconButton aria-label="arrow" onClick={handleResultDetailsClick(index)}>
                             <StarsIcon />
                           </IconButton>
                         </Grid>
@@ -249,7 +253,33 @@ const Content = () => {
                           </IconButton>
                         </Grid>
                       </Grid>
-
+                      {resultDetailsClickedIndex[index]?
+                        <Grid 
+                          container 
+                          spacing={2} 
+                          alignItems="center" 
+                          sx={{
+                            background:'#F6F6F6',
+                            margin: 0
+                          }}
+                        >
+                          <Grid item xs={1}>
+                          </Grid>
+                          <Grid item xs={11}>
+                            <Typography>Search or browse for data and science information from the Mars Science Laboratory Rover Curiosity*</Typography>
+                            <Stack direction="row" alignItems="center" gap={1}>
+                              <Typography>Tags*</Typography>
+                              <Chip label="PDS3" color="primary" variant="outlined"/>
+                              <Chip label="Analysis" color="primary" variant="outlined"/>
+                              <Chip label="Search" color="primary" variant="outlined"/>
+                              <Chip label="Dissemination" color="primary" variant="outlined"/>
+                              <Chip label="GUI" color="primary" variant="outlined"/>
+                            </Stack>
+                          </Grid>
+                        </Grid>
+                        :
+                        ""
+                      }
                       <Divider/>
                     </Box>
                   ))}
@@ -276,11 +306,6 @@ const Content = () => {
               >
                 Learn React
               </a>
-
-              <Grid style={{ display: "flex" }}>
-                  <Typography>Revolve</Typography>
-              </Grid>
-              
             </div>
           </Grid>
         </Grid>
