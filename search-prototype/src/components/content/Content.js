@@ -18,10 +18,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
-import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import StarsIcon from '@mui/icons-material/Stars';
 import IconButton from '@mui/material/IconButton';
+import Tag from './Tag'
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
   '& label.Mui-focused': {
@@ -269,11 +269,11 @@ const Content = () => {
                             <Typography>Search or browse for data and science information from the Mars Science Laboratory Rover Curiosity*</Typography>
                             <Stack direction="row" alignItems="center" gap={1}>
                               <Typography>Tags*</Typography>
-                              <Chip label="PDS3" color="primary" variant="outlined"/>
-                              <Chip label="Analysis" color="primary" variant="outlined"/>
-                              <Chip label="Search" color="primary" variant="outlined"/>
-                              <Chip label="Dissemination" color="primary" variant="outlined"/>
-                              <Chip label="GUI" color="primary" variant="outlined"/>
+                              <Tag label="PDS3" color="primary" variant="outlined"/>
+                              <Tag label="Analysis" color="primary" variant="outlined"/>
+                              <Tag label="Search" color="primary" variant="outlined"/>
+                              <Tag label="Dissemination" color="primary" variant="outlined"/>
+                              <Tag label="GUI" color="primary" variant="outlined"/>
                             </Stack>
                           </Grid>
                         </Grid>
