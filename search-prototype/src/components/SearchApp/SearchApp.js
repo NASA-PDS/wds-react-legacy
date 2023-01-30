@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../logo.svg';
-import testImage from '../../nasaTest.jpeg';
 import '../../App.css';
-import TextField from '@mui/material/TextField';
 import { setSearchText } from "../../store/AppSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchResults } from '../../store/AppSlice';
@@ -12,54 +10,24 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import StarsIcon from '@mui/icons-material/Stars';
 import IconButton from '@mui/material/IconButton';
-import Tag from './Tag'
+import Tag from '../Tag/Tag';
+import Card from '../Card/Card';
+import TextField from '../TextField/TextField';
 
-const CustomTextField = styled(TextField)(({ theme }) => ({
-  '& label.Mui-focused': {
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: theme.pdsTextField.rootBorder,
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: theme.pdsTextField.rootBorder,
-      borderRadius: '2px'
-    },
-    '&:hover fieldset': {
-      borderColor: theme.pdsTextField.hoverBorder,
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: theme.pdsTextField.focusBorder,
-    },
-    input: {
-      padding: '14px 16px',
-      paddingLeft: 0
-    },
-    label: {
-    },
-    '& .MuiInputAdornment-root': {
-      color: theme.pdsTextField.iconColor
-    }
-  }
-}));
+const SearchApp = () => {
+  let showCard = false;
 
-const Content = () => {
   const [addRequestStatus, setAddRequestStatus] = useState('idle');
-  const [isCardHovered, setIsCardHovered] = useState(false);
   const [resultDetailsClickedIndex, setResultDetailsClickedIndex] = useState({});
 
   const dispatch = useDispatch();
-  let show = false;
-
+  
   const searchText = useSelector((state) => state.app.searchText);
   const searchResults = useSelector((state) => state.app.searchResults);
 
@@ -83,14 +51,6 @@ const Content = () => {
     if(e.keyCode === 13) {
       onSearchClicked();
     }
-  }
-
-  const onCardMouseOver = () => {
-    setIsCardHovered(true);
-  }
-
-  const onCardMouseOut = () => {
-    setIsCardHovered(false);
   }
 
   const handleResultDetailsClick = (index) => () => {
@@ -125,8 +85,7 @@ const Content = () => {
             <p>facets list goes here:</p>
           </Grid>
           <Grid xs={9}>
-
-            <CustomTextField
+            <TextField
               id="outlined-start-adornment2"
               placeholder="Search PDS"
               InputProps={{
@@ -135,72 +94,13 @@ const Content = () => {
               onChange={handleSearchTextChanged}
               onKeyDown={handleKeyDown}
               value={searchText}
-              fullWidth
             />
 
             <p>sorting buttons go here</p>
             
             <div>
-              {show? 
-                <Card 
-                  onMouseOver={onCardMouseOver} 
-                  onMouseOut={onCardMouseOut} 
-                  sx={{ 
-                    maxWidth: 345, 
-                    boxShadow:'none',
-                    ':hover': {
-                      cursor: 'pointer',
-                    },
-                    ':focus': {
-                      border: '1px dotted',
-                    }
-                  }}
-                >
-                  <Box sx={{ position: 'relative' }}>
-                    <CardMedia
-                      component="img"
-                      height="480"
-                      width="312"
-                      image={testImage}
-                      sx={{
-                        transform: isCardHovered? 'scale(1.25)' : 'scale(1)',
-                        transition: 'all .2s ease',
-                        verticalAlign: 'middle'
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '50%',
-                        background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))',
-                        color: 'white',
-                        padding: '20px 20px',
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        width: '100%',
-                        color: 'white',
-                        padding: '20px 20px',
-                      }}
-                    >
-                      <Typography variant="h5" component="span">Astronauts {/*<Badge color="secondary" badgeContent=" "><EastIcon/></Badge>*/}</Typography>
-                      <Typography variant="body2">Learn about those of the NASA corps who make "space sailing" their career profession.</Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        position: 'relative', top: '-10px', zIndex: '3'
-                      }}
-                    >
-                    </Box>
-                  </Box>
-                </Card>
+              {showCard? 
+                <Card/>
                 :
                 ""
               }
@@ -215,24 +115,24 @@ const Content = () => {
                 <div>
                   <Box>
                     <Grid container spacing={2}>
-                      <Grid item xs={9}>
+                      <Grid xs={9}>
                         <Typography>Result</Typography>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid xs={3}>
                         <Typography>Category</Typography>
                       </Grid>
                     </Grid>
                   </Box>
 
                   {searchResults.data.map((result, index) => (
-                    <Box>
+                    <Box key={index}>
                       <Grid container spacing={2} alignItems="center">
-                        <Grid item xs={1}>
+                        <Grid xs={1}>
                           <IconButton aria-label="arrow" onClick={handleResultDetailsClick(index)}>
                             <StarsIcon />
                           </IconButton>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid xs={8}>
                           <Stack alignItems="left" gap={1}>
                             <Typography variant="subtitle2" display="inline">
                               {result.title}
@@ -242,12 +142,12 @@ const Content = () => {
                             </Typography>
                           </Stack>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid xs={2}>
                           <Typography variant="body1" display="block" color='red'>
                             DATA*
                           </Typography>
                         </Grid>
-                        <Grid item xs={1}>
+                        <Grid xs={1}>
                           <IconButton aria-label="arrow" color="red">
                             <StarsIcon />
                           </IconButton>
@@ -263,9 +163,9 @@ const Content = () => {
                             margin: 0
                           }}
                         >
-                          <Grid item xs={1}>
+                          <Grid xs={1}>
                           </Grid>
-                          <Grid item xs={11}>
+                          <Grid xs={11}>
                             <Typography>Search or browse for data and science information from the Mars Science Laboratory Rover Curiosity*</Typography>
                             <Stack direction="row" alignItems="center" gap={1}>
                               <Typography>Tags*</Typography>
@@ -314,4 +214,4 @@ const Content = () => {
   );
 }
 
-export default Content;
+export default SearchApp;

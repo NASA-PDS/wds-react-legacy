@@ -14,7 +14,6 @@ const PdsChip = styled(Chip)(({ theme }) => ({
 }));
 
 const Tag = (props) => {
-
   return (
     <div>
       <PdsChip label={props.label} color={props.color} variant={props.variant}/>

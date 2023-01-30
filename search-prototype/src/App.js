@@ -1,4 +1,4 @@
-import Content from './components/content/Content';
+import SearchApp from './components/SearchApp/SearchApp';
 import store from './store/store';
 import { Provider } from 'react-redux'
 import { ThemeProvider } from '@mui/material/styles';
@@ -10,7 +10,7 @@ function App() {
     <Provider store={store}>
         <ThemeProvider theme={pdsTheme}>
           <CssBaseline/>
-          <Content/>
+          <SearchApp/>
         </ThemeProvider>
     </Provider>
   );
