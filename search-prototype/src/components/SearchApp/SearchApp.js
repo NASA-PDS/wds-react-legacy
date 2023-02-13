@@ -12,19 +12,14 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
-import StarsIcon from '@mui/icons-material/Stars';
-import IconButton from '@mui/material/IconButton';
-import Tag from '../Tag/Tag';
 import Card from '../Card/Card';
 import TextField from '../TextField/TextField';
+import FeaturedLinkListItem from '../FeaturedLinkListItem/FeaturedLinkListItem';
 
 const SearchApp = () => {
   let showCard = false;
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle');
-  const [resultDetailsClickedIndex, setResultDetailsClickedIndex] = useState({});
 
   const dispatch = useDispatch();
   
@@ -43,7 +38,6 @@ const SearchApp = () => {
       console.error('Failed to save the post: ', err);
     } finally {
       setAddRequestStatus('idle');
-      setResultDetailsClickedIndex({});
     }
   }
 
@@ -51,13 +45,6 @@ const SearchApp = () => {
     if(e.keyCode === 13) {
       onSearchClicked();
     }
-  }
-
-  const handleResultDetailsClick = (index) => () => {
-    setResultDetailsClickedIndex(state => ({
-      ...state,
-      [index]: !state[index]
-    }));
   }
   
   return (
@@ -125,63 +112,7 @@ const SearchApp = () => {
                   </Box>
 
                   {searchResults.data.map((result, index) => (
-                    <Box key={index}>
-                      <Grid container spacing={2} alignItems="center">
-                        <Grid xs={1}>
-                          <IconButton aria-label="arrow" onClick={handleResultDetailsClick(index)}>
-                            <StarsIcon />
-                          </IconButton>
-                        </Grid>
-                        <Grid xs={8}>
-                          <Stack alignItems="left" gap={1}>
-                            <Typography variant="subtitle2" display="inline">
-                              {result.title}
-                            </Typography>
-                            <Typography variant="body1" gutterBottom>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor*
-                            </Typography>
-                          </Stack>
-                        </Grid>
-                        <Grid xs={2}>
-                          <Typography variant="body1" display="block" color='red'>
-                            DATA*
-                          </Typography>
-                        </Grid>
-                        <Grid xs={1}>
-                          <IconButton aria-label="arrow" color="red">
-                            <StarsIcon />
-                          </IconButton>
-                        </Grid>
-                      </Grid>
-                      {resultDetailsClickedIndex[index]?
-                        <Grid 
-                          container 
-                          spacing={2} 
-                          alignItems="center" 
-                          sx={{
-                            background:'#F6F6F6',
-                            margin: 0
-                          }}
-                        >
-                          <Grid xs={1}>
-                          </Grid>
-                          <Grid xs={11}>
-                            <Typography>Search or browse for data and science information from the Mars Science Laboratory Rover Curiosity*</Typography>
-                            <Stack direction="row" alignItems="center" gap={1}>
-                              <Typography>Tags*</Typography>
-                              <Tag label="PDS3" color="primary" variant="outlined"/>
-                              <Tag label="Analysis" color="primary" variant="outlined"/>
-                              <Tag label="Search" color="primary" variant="outlined"/>
-                              <Tag label="Dissemination" color="primary" variant="outlined"/>
-                              <Tag label="GUI" color="primary" variant="outlined"/>
-                            </Stack>
-                          </Grid>
-                        </Grid>
-                        :
-                        ""
-                      }
-                      <Divider/>
-                    </Box>
+                    <FeaturedLinkListItem key={index} result={result}/>
                   ))}
                 </div>
                 :
