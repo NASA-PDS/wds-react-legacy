@@ -15,6 +15,7 @@ import Paper from '@mui/material/Paper';
 import Card from '../Card/Card';
 import TextField from '../TextField/TextField';
 import FeaturedLinkListItem from '../FeaturedLinkListItem/FeaturedLinkListItem';
+import Sorting from './Sorting';
 
 const SearchApp = () => {
   let showCard = false;
@@ -83,7 +84,7 @@ const SearchApp = () => {
               value={searchText}
             />
 
-            <p>sorting buttons go here</p>
+            <Sorting/>
             
             <div>
               {showCard? 
