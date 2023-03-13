@@ -5,7 +5,8 @@ import Config from '../Config';
 const initialState = {
     searchText : '',
     searchResults: {},
-    dataTypeEndPoint: 'data/collection',
+    dataTypeEndPoint: 'data/collections',
+    dataTypeText: 'Everything',
     dataTypeValue: 0
 }
 
@@ -19,12 +20,30 @@ const getDataTypeEndpoint = (dataTypeValue) => {
         return 'classes/collections';
     }
     else if(dataTypeValue === 2){
-        //Tools. Unavailable. Can try old tool search.
-        return 'classes/collections'
+        //Documents. 
+        return 'classes/documents';  
     }
     else if(dataTypeValue === 3){
-        //Documents. 
-        return 'classes/documents';
+       //Tools. Unavailable. Can try old tool search.
+       return ''
+    }
+    else{
+        return '';
+    }
+}
+
+const getDataTypeText = (dataTypeValue) => {
+    if(dataTypeValue === 0){
+        return 'Everything';
+    }
+    else if(dataTypeValue === 1){
+        return 'Data';
+    }
+    else if(dataTypeValue === 2){
+        return 'Documents';  
+    }
+    else if(dataTypeValue === 3){
+       return 'Tools'
     }
     else{
         return '';
@@ -38,10 +57,23 @@ export const getSearchResults = createAsyncThunk(
         console.log("state", state);
 
         let url = Config.api + '/' + state.dataTypeEndPoint + '?keyword=' + encodeURI(state.searchText) + '&wt=json';
+        if(state.dataTypeValue === 3){
+            url = Config.tools + '&q=product-class%3Aproduct_service%20AND%20(title%3A*' + encodeURI(state.searchText)  + '*%20OR%20service_abstract_desc%3A*' + encodeURI(state.searchText)  + '*%20OR%20service_description%3A*' + encodeURI(state.searchText)  + '*)&wt=json';
+        }
+
         console.log('url', url);
         const response = await client.get(url);
-        
-        return response.data
+        console.log('response', response);
+
+        let data;
+        if(state.dataTypeValue === 3){
+            data = {data: response.data.response.docs};
+        }
+        else{
+            data = response.data;
+        }
+
+        return data
     }
 )
 
@@ -55,6 +87,7 @@ export const appSlice = createSlice({
         setDataTypeValue: (state, action) => {
             state.dataTypeValue = action.payload;
             state.dataTypeEndPoint = getDataTypeEndpoint(action.payload);
+            state.dataTypeText = getDataTypeText(action.payload);
         }
     },
     extraReducers(builder) {

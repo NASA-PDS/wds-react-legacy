@@ -30,6 +30,8 @@ const SearchApp = () => {
   const searchText = useSelector((state) => state.app.searchText);
   const searchResults = useSelector((state) => state.app.searchResults);
   const dataTypeValue = useSelector((state) => state.app.dataTypeValue);
+  const dataTypeText = useSelector((state) => state.app.dataTypeText);
+  const currstate = useSelector((state) => state);
 
   const handleSearchTextChanged = (e) => {
     dispatch(setSearchText(e.target.value));
@@ -78,7 +80,7 @@ const SearchApp = () => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid xs={3}>
-            <p>Showing ____ for _____</p>
+            <p>Showing {dataTypeText} for {searchText}</p>
             <p>facets list goes here:</p>
           </Grid>
           <Grid xs={9}>
@@ -97,10 +99,10 @@ const SearchApp = () => {
             <Box sx={{ width: '100%' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={dataTypeValue} onChange={handleTabChange} aria-label="data type tabs">
-                  <Tab label="Everything"/>
-                  <Tab label="Data"/>
-                  <Tab label="Documents"/>
-                  <Tab label="Tools"/>
+                  <Tab label="Everything" sx={{textTransform: 'none'}}/>
+                  <Tab label="Data" sx={{textTransform: 'none'}}/>
+                  <Tab label="Documents" sx={{textTransform: 'none'}}/>
+                  <Tab label="Tools" sx={{textTransform: 'none'}}/>
                 </Tabs>
               </Box>
               
@@ -116,10 +118,6 @@ const SearchApp = () => {
 
               {addRequestStatus === 'idle'?
                 <div>
-                  <p>
-                    This is the search text: {JSON.stringify(searchText)}
-                  </p>
-
                   <Paper elevation={0}>
                     
                   {searchResults.data?
@@ -144,7 +142,6 @@ const SearchApp = () => {
                   }
                   </Paper>
                   
-
                   <p>Search Response: {JSON.stringify(searchResults)}</p>
 
                   <img src={logo} className="App-logo" alt="logo" />
