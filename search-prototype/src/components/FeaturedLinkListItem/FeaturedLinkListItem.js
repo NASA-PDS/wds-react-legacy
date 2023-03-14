@@ -29,8 +29,16 @@ const FeaturedLinkListItem = (props) => {
             <Typography variant="subtitle2" display="inline">
               {props.result.title}
             </Typography>
+
             <Typography variant="body1" gutterBottom>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor*
+              {props.result.data_product_type?
+                props.result.data_product_type[0] === 'Service'?
+                  props.result.description[0]
+                  :
+                  ''
+                :
+                props.result.properties.description[0]
+              }
             </Typography>
           </Stack>
         </Grid>
