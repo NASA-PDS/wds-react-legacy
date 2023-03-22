@@ -200,6 +200,20 @@ const FeaturedLinkListItem = (props) => {
                       <Typography>Doesn't Exist In JSON</Typography>
                     </Grid>
                   </Stack>
+                  <Stack direction="row" alignItems="left" gap={1}>
+                  <Grid xs={2}>
+                    <Typography fontWeight='fontWeightMedium'>Tags*</Typography>
+                  </Grid>
+                  <Grid xs={10}>
+                    <Stack direction="row" alignItems="center" gap={1}>
+                      <Tag label="PDS3" color="primary" variant="outlined"/>
+                      <Tag label="Analysis" color="primary" variant="outlined"/>
+                      <Tag label="Search" color="primary" variant="outlined"/>
+                      <Tag label="Dissemination" color="primary" variant="outlined"/>
+                      <Tag label="GUI" color="primary" variant="outlined"/>
+                    </Stack>
+                  </Grid>
+                </Stack>
                 </Grid>
               </Grid>
               :
