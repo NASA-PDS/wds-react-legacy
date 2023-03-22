@@ -125,10 +125,10 @@ const SearchApp = () => {
                       <Box>
                         <Grid container spacing={2}>
                           <Grid xs={9}>
-                            <Typography>Result</Typography>
+                            <Typography fontWeight='fontWeightMedium'>Result</Typography>
                           </Grid>
                           <Grid xs={3}>
-                            <Typography>Category</Typography>
+                            <Typography fontWeight='fontWeightMedium'>Category</Typography>
                           </Grid>
                         </Grid>
                       </Box>
@@ -138,26 +138,14 @@ const SearchApp = () => {
                       ))}
                     </div>
                     :
-                    ""
+                    <div>
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <p>
+                      Enter something in the search box and press Enter!
+                    </p>
+                    </div>
                   }
                   </Paper>
-                  
-                  <p>Search Response: {JSON.stringify(searchResults)}</p>
-
-                  <img src={logo} className="App-logo" alt="logo" />
-                  <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                    
-                  </p>
-                  
-                  <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Learn React
-                  </a>
                 </div>
                 :
                 <CircularProgress />

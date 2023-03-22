@@ -56,7 +56,7 @@ export const getSearchResults = createAsyncThunk(
         const state = getState().app;
         console.log("state", state);
 
-        let url = Config.api + '/' + state.dataTypeEndPoint + '?keyword=' + encodeURI(state.searchText) + '&wt=json';
+        let url = Config.api + '/' + state.dataTypeEndPoint + '?keywords=' + encodeURI(state.searchText) + '&wt=json';
         if(state.dataTypeValue === 3){
             url = Config.tools + '&q=product-class%3Aproduct_service%20AND%20(title%3A*' + encodeURI(state.searchText)  + '*%20OR%20service_abstract_desc%3A*' + encodeURI(state.searchText)  + '*%20OR%20service_description%3A*' + encodeURI(state.searchText)  + '*)&wt=json';
         }
