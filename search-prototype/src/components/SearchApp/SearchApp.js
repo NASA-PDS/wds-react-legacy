@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from '../../logo.svg';
 import '../../App.css';
-import { setSearchText } from "../../store/AppSlice";
+import { setSearchText, setDataTypeValue } from "../../store/AppSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchResults } from '../../store/AppSlice';
 import SearchIcon from '@mui/icons-material/Search';
@@ -15,6 +15,10 @@ import Paper from '@mui/material/Paper';
 import Card from '../Card/Card';
 import TextField from '../TextField/TextField';
 import FeaturedLinkListItem from '../FeaturedLinkListItem/FeaturedLinkListItem';
+import Sorting from './Sorting';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const SearchApp = () => {
   let showCard = false;
@@ -25,6 +29,9 @@ const SearchApp = () => {
   
   const searchText = useSelector((state) => state.app.searchText);
   const searchResults = useSelector((state) => state.app.searchResults);
+  const dataTypeValue = useSelector((state) => state.app.dataTypeValue);
+  const dataTypeText = useSelector((state) => state.app.dataTypeText);
+  const currstate = useSelector((state) => state);
 
   const handleSearchTextChanged = (e) => {
     dispatch(setSearchText(e.target.value));
@@ -33,7 +40,7 @@ const SearchApp = () => {
   const onSearchClicked = async () => {
     try {
       setAddRequestStatus('pending');
-      await dispatch(getSearchResults(searchText)).unwrap();
+      await dispatch(getSearchResults()).unwrap();
     } catch (err) {
       console.error('Failed to save the post: ', err);
     } finally {
@@ -46,6 +53,11 @@ const SearchApp = () => {
       onSearchClicked();
     }
   }
+
+  const handleTabChange = (event, newValue) => {
+    dispatch(setDataTypeValue(newValue));
+    onSearchClicked();
+  };
   
   return (
     <div className="App">
@@ -68,7 +80,7 @@ const SearchApp = () => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid xs={3}>
-            <p>Showing ____ for _____</p>
+            <p>Showing {dataTypeText} for {searchText}</p>
             <p>facets list goes here:</p>
           </Grid>
           <Grid xs={9}>
@@ -83,7 +95,19 @@ const SearchApp = () => {
               value={searchText}
             />
 
-            <p>sorting buttons go here</p>
+
+            <Box sx={{ width: '100%' }}>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={dataTypeValue} onChange={handleTabChange} aria-label="data type tabs">
+                  <Tab label="Everything" sx={{textTransform: 'none'}}/>
+                  <Tab label="Data" sx={{textTransform: 'none'}}/>
+                  <Tab label="Documents" sx={{textTransform: 'none'}}/>
+                  <Tab label="Tools" sx={{textTransform: 'none'}}/>
+                </Tabs>
+              </Box>
+              
+            </Box>
+            <Sorting/>
             
             <div>
               {showCard? 
@@ -92,51 +116,40 @@ const SearchApp = () => {
                 ""
               }
 
-              <p>
-                This is the search text: {JSON.stringify(searchText)}
-              </p>
-
-              <Paper elevation={0}>
-                
-              {searchResults.data?
+              {addRequestStatus === 'idle'?
                 <div>
-                  <Box>
-                    <Grid container spacing={2}>
-                      <Grid xs={9}>
-                        <Typography>Result</Typography>
-                      </Grid>
-                      <Grid xs={3}>
-                        <Typography>Category</Typography>
-                      </Grid>
-                    </Grid>
-                  </Box>
+                  <Paper elevation={0}>
+                    
+                  {searchResults.data?
+                    <div>
+                      <Box>
+                        <Grid container spacing={2}>
+                          <Grid xs={9}>
+                            <Typography fontWeight='fontWeightMedium'>Result</Typography>
+                          </Grid>
+                          <Grid xs={3}>
+                            <Typography fontWeight='fontWeightMedium'>Category</Typography>
+                          </Grid>
+                        </Grid>
+                      </Box>
 
-                  {searchResults.data.map((result, index) => (
-                    <FeaturedLinkListItem key={index} result={result}/>
-                  ))}
+                      {searchResults.data.map((result, index) => (
+                        <FeaturedLinkListItem key={index} result={result}/>
+                      ))}
+                    </div>
+                    :
+                    <div>
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <p>
+                      Enter something in the search box and press Enter!
+                    </p>
+                    </div>
+                  }
+                  </Paper>
                 </div>
                 :
-                ""
+                <CircularProgress />
               }
-              </Paper>
-              
-
-              <p>Search Response: {JSON.stringify(searchResults)}</p>
-
-              <img src={logo} className="App-logo" alt="logo" />
-              <p>
-                Edit <code>src/App.js</code> and save to reload.
-                
-              </p>
-              
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn React
-              </a>
             </div>
           </Grid>
         </Grid>
