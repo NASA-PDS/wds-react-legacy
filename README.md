@@ -33,9 +33,9 @@ Then include the component in your react render code:
 In react the doi search could look like this with the parameters changed:
 
 ```javascript
-<DoiSearch 
+<DoiSearch
     api={'http//localhost:8085/PDS_APIs/pds_doi_api/0.2/'}
-    useClientRouter={true} 
+    useClientRouter={true}
     showActions={true}
 />
 ```
@@ -90,6 +90,15 @@ Import the component into your client app using the Usage section.
 There are sometimes problems with multiple instances of react caused by npm link. If this happens, delete `node_modules/react` inside the pds-wds-react source. Then stop and restart the client test app again.
 
 ## Building
+
+### Prerequisite
+
+Use Node.js version 18 (LTS)
+
+### Build the packages
+
+`npm install --legacy-peer-deps`
+
 `npm run build`
 Two directories will be created `/build` and `/embedbuild`.
 
@@ -132,4 +141,3 @@ For example in chrome use https://chrome.google.com/webstore/detail/moesif-origi
 In Firefox you can you use https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/
 
 Just make sure to turn off the extension when not in use.
-
