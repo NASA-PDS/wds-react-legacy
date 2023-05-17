@@ -93,7 +93,14 @@ There are sometimes problems with multiple instances of react caused by npm link
 
 ### Prerequisite
 
-Use Node.js version 18 (LTS)
+Install nvm to manage the nodejs environments.
+
+Use Node.js version 18.16.0 (LTS):
+
+    nvm install 18.16.0
+    nvm use 18.16.0
+
+
 
 ### Build the packages
 

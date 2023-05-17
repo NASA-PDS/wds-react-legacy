@@ -7,8 +7,8 @@
   "homepage": "https://github.com/NASA-PDS/pds-wds-react/tree/embed-and-npm-builder",
   "scripts": {
     "embeddev": "node scripts/embeddev.js",
-    "embedbuild": "export SET NODE_OPTIONS=--openssl-legacy-provider &&  node scripts/embedbuild.js",
-    "npmbuild": "export SET NODE_OPTIONS=--openssl-legacy-provider &&  webpack --mode production",
+    "embedbuild": "node scripts/embedbuild.js",
+    "npmbuild": "webpack --mode production",
     "build": "npm run embedbuild && npm run npmbuild",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",
