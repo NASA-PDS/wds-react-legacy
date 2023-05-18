@@ -19,6 +19,24 @@ import Sorting from './Sorting';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import CircularProgress from '@mui/material/CircularProgress';
+import Filters from '../Filters/Filters'
+
+const filtersExample = {
+  filters:[
+    {
+      name:'category',
+      options: ['analysis','reader','design','dissemination','generation','planning','search','transformation','validation','visualization']
+    },
+    {  
+      name:'interface type',
+      options:['api','command-line','gui','service']
+    },
+    {
+      name:'support',
+      options:['pds3','pds4']
+    }
+  ]
+}
 
 const SearchApp = () => {
   let showCard = false;
@@ -31,7 +49,6 @@ const SearchApp = () => {
   const searchResults = useSelector((state) => state.app.searchResults);
   const dataTypeValue = useSelector((state) => state.app.dataTypeValue);
   const dataTypeText = useSelector((state) => state.app.dataTypeText);
-  const currstate = useSelector((state) => state);
 
   const handleSearchTextChanged = (e) => {
     dispatch(setSearchText(e.target.value));
@@ -58,6 +75,22 @@ const SearchApp = () => {
     dispatch(setDataTypeValue(newValue));
     onSearchClicked();
   };
+
+  const setUpFilterOptions = (filters) => {
+    let optionsList = [];
+  
+    filters.forEach((filter) => {
+      filter.options.forEach((option) => {
+        optionsList.push({
+          filterName: filter.name,
+          optionName: option,
+          isSelected: false
+        })
+      })
+    })
+
+    return optionsList;
+  }
   
   return (
     <div className="App">
@@ -82,6 +115,8 @@ const SearchApp = () => {
           <Grid xs={3}>
             <p>Showing {dataTypeText} for {searchText}</p>
             <p>facets list goes here:</p>
+
+            <Filters filters={filtersExample.filters} options={setUpFilterOptions(filtersExample.filters)}/>
           </Grid>
           <Grid xs={9}>
             <TextField
