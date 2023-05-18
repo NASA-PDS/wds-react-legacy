@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import logo from '../../logo.svg';
 import '../../App.css';
 import { setSearchText, setDataTypeValue } from "../../store/AppSlice";
@@ -38,7 +39,44 @@ const filtersExample = {
   ]
 }
 
+
+const searchTypeToValue = (searchType) => {
+    let type = 0;
+
+    if(searchType === "data"){
+      type = 1;
+    }
+    if(searchType === "documents"){
+      type = 2;
+    }
+    if(searchType === "tools"){
+      type = 3;
+    }
+
+    return type;
+}
+
+const valueToSearchType = (dataTypeValue) => {
+    if(dataTypeValue === 0){
+      return 'everything';
+  }
+  else if(dataTypeValue === 1){
+      return 'data';
+  }
+  else if(dataTypeValue === 2){
+      return 'documents';  
+  }
+  else if(dataTypeValue === 3){
+    return 'tools'
+  }
+  else{
+      return '';
+  }
+  }
+
 const SearchApp = () => {
+  let params = useParams();
+  let navigate = useNavigate();
   let showCard = false;
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle');
@@ -68,12 +106,24 @@ const SearchApp = () => {
   const handleKeyDown = (e) => {
     if(e.keyCode === 13) {
       onSearchClicked();
+
+      if(searchText && dataTypeText){
+        navigate("/" + dataTypeText.toLowerCase() + "/" + searchText);
+      }
     }
   }
 
   const handleTabChange = (event, newValue) => {
-    dispatch(setDataTypeValue(newValue));
-    onSearchClicked();
+    const tabChange = async () => {
+      await dispatch(setDataTypeValue(newValue));
+
+      onSearchClicked();
+
+      if(searchText && dataTypeText){
+        navigate("/" + valueToSearchType(newValue) + "/" + searchText);
+      }
+    }
+    tabChange();
   };
 
   const setUpFilterOptions = (filters) => {
@@ -91,6 +141,22 @@ const SearchApp = () => {
 
     return optionsList;
   }
+
+
+
+  useEffect(() => {
+    async function setDefaults(urlParams) {
+      if(urlParams.searchText){
+        await dispatch(setSearchText(urlParams.searchText));
+      }
+      if(urlParams.searchType){
+        const type = searchTypeToValue(urlParams.searchType);
+        await dispatch(setDataTypeValue(type));
+      }
+      onSearchClicked();
+    }
+    setDefaults(params);
+  }, []);
   
   return (
     <div className="App">

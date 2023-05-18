@@ -17,8 +17,6 @@ const FeaturedLinkListItem = (props) => {
   }
 
   const getType = (result) => {
-    console.log("result", result);
-
     var type = "Undefined";
     if(result.type){
       if(result.type === "Product_Collection"){
