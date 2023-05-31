@@ -81,7 +81,9 @@ export const getSearchResults = createAsyncThunk(
                     summary: {
                         hits: response.data.response.numFound,
                         start: response.data.response.start,
-                        limit: 100
+                        limit: 100,
+                        took: response.data.responseHeader.QTime,
+                        searchText: state.searchText
                     }
                 }
             }
@@ -90,6 +92,8 @@ export const getSearchResults = createAsyncThunk(
             data = {
                 data: response.data,
             }
+
+            data.data.summary.searchText = state.searchText
         }
 
         return data

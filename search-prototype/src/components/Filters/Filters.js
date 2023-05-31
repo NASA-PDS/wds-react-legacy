@@ -62,32 +62,38 @@ const Filters = (props) => {
 
   return (
     <div>
-      <Typography fontWeight='fontWeightMedium'>
-        Active Filters
-      </Typography>
-    
-      <Divider sx={{marginBottom:'5px'}}/>
+      {selectedOptions.length > 0?
+        <div>
+          <Typography fontWeight='fontWeightMedium'>
+            Active Filters
+          </Typography>
+        
+          <Divider sx={{marginBottom:'5px'}}/>
 
-      {selectedOptions.map((option, index) => (
-        <Box sx={{marginBottom:'5px'}}>
-          <Chip 
-            key={index} 
-            label={titleCase(option.optionName)} 
-            handleDelete={() => handleRemoveOption(option)}
-          />
-        </Box>
-      ))}
+          {selectedOptions.map((option, index) => (
+            <Box sx={{marginBottom:'5px'}}>
+              <Chip 
+                key={index} 
+                label={titleCase(option.optionName)} 
+                handleDelete={() => handleRemoveOption(option)}
+              />
+            </Box>
+          ))}
 
-      <Box
-        sx={{
-          cursor: 'pointer', 
-          textDecoration: 'underline dotted',
-          color:'#58585a'
-        }} 
-        onClick={clearFilters}
-      >
-          Clear Filters
-      </Box>
+          <Box
+            sx={{
+              cursor: 'pointer', 
+              textDecoration: 'underline dotted',
+              color:'#58585a'
+            }} 
+            onClick={clearFilters}
+          >
+              Clear Filters
+          </Box>
+        </div>
+        :
+        ''
+      }
 
       <Typography 
         fontWeight='fontWeightMedium' 

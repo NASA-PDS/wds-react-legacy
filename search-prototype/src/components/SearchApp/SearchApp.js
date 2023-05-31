@@ -9,8 +9,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Card from '../Card/Card';
@@ -22,6 +20,8 @@ import Tab from '@mui/material/Tab';
 import CircularProgress from '@mui/material/CircularProgress';
 import Filters from '../Filters/Filters'
 import Pagination from '../Pagination/Pagination';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import SearchDetails from './SearchDetails';
 
 const filtersExample = {
   filters:[
@@ -199,27 +199,14 @@ const SearchApp = () => {
   return (
     <div className="App">
 
-      <div role="presentation">
-        <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
-            Home
-          </Link>
-          <Link
-            underline="hover"
-            color="inherit"
-            href="/material-ui/getting-started/installation/"
-          >
-            Search Results
-          </Link>
-        </Breadcrumbs>
-      </div>
+      <Breadcrumbs/>
 
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid xs={3}>
-            <p>Showing {dataTypeText} for {searchText}</p>
-            <p>facets list goes here:</p>
-
+            <br/>
+            <SearchDetails/>
+            <br/>
             <Filters filters={filtersExample.filters} options={setUpFilterOptions(filtersExample.filters)}/>
           </Grid>
           <Grid xs={9}>
