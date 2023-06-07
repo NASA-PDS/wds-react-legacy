@@ -15,7 +15,6 @@ function App() {
             <Routes>
               <Route path="/" element = { <SearchApp/>} />
               <Route path="/:searchText" element = { <SearchApp/>} />
-              <Route path="/:searchType/:searchText" element = { <SearchApp/>} />
             </Routes>
           </ThemeProvider>
       </Provider>

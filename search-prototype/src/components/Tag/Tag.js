@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 
 const PdsChip = styled(Chip)(({ theme }) => ({
