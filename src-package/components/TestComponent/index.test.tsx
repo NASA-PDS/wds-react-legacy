@@ -3,8 +3,8 @@ import renderer from 'react-test-renderer'
 import { describe, expect, test } from 'vitest'
 import TestComponent from './index'
 
-describe('HelloWorld', () => {
-  test('HelloWorld component renders correctly', () => {
+describe('TestComponent', () => {
+  test('TestComponent component renders correctly', () => {
     const component = renderer.create(
       <TestComponent />
     )
