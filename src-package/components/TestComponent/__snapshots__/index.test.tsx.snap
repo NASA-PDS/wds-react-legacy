@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`HelloWorld > HelloWorld component renders correctly 1`] = `
+exports[`TestComponent > TestComponent component renders correctly 1`] = `
 <div>
   Hello, 
   World
@@ -8,7 +8,7 @@ exports[`HelloWorld > HelloWorld component renders correctly 1`] = `
 </div>
 `;
 
-exports[`HelloWorld > The name prop works 1`] = `
+exports[`TestComponent > The name prop works 1`] = `
 <div>
   Hello, 
   Universe
