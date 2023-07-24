@@ -1,5 +1,1 @@
-import TestComponent from "./components/TestComponent";
-
-export{
-    TestComponent
-}
+export * from "./components/HelloWorld";

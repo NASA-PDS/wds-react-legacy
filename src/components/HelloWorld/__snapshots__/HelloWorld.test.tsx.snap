@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HelloWorld > HelloWorld component renders correctly 1`] = `
+<div
+  className="pds-wds-react-hello-world"
+>
+  Hello, 
+  Planetary Data System
+  !
+</div>
+`;
+
+exports[`HelloWorld > The name prop works 1`] = `
+<div
+  className="pds-wds-react-hello-world"
+>
+  Hello, 
+  Universe
+  !
+</div>
+`;

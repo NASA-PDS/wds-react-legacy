@@ -1,12 +1,12 @@
 import renderer from 'react-test-renderer'
 import { describe, expect, test } from 'vitest'
-import TestComponent from './index'
+import { HelloWorld } from "./HelloWorld"
 
-describe('TestComponent', () => {
+describe('HelloWorld', () => {
 
-  test('TestComponent component renders correctly', () => {
+  test('HelloWorld component renders correctly', () => {
     const component = renderer.create(
-      <TestComponent />
+      <HelloWorld />
     )
 
     const tree = component.toJSON()
@@ -16,12 +16,12 @@ describe('TestComponent', () => {
 
   test('The name prop works', () => {
     const component = renderer.create(
-      <TestComponent name={'Universe'} />
+      <HelloWorld name={'Universe'} />
     )
 
     const tree = component.toJSON()
 
     expect(tree).toMatchSnapshot()
   })
-  
+
 })

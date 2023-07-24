@@ -1,0 +1,14 @@
+.pds-wds-react-hello-world {
+
+   font-size: 1em;
+
+   &.bold {
+      font-weight: 700;
+   }
+
+   &.heading {
+      font-size: 3em;
+      font-weight: 700;
+   }
+   
+}
