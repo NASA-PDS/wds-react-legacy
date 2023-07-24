@@ -8,7 +8,7 @@ import tsConfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve('src-package', 'index.ts'),
+      entry: path.resolve('src', 'index.ts'),
       formats: [ 'cjs', 'es', 'umd' ],
       fileName: (format) => `${format}/pds-wds-react.${format}.js`,
       name: 'pds-wds-react',
@@ -26,6 +26,6 @@ export default defineConfig({
     react(),
     tsConfigPaths(),
     dts({
-      include: ['src-package/components/'],
+      include: ['src/components/'],
   })]
 })
