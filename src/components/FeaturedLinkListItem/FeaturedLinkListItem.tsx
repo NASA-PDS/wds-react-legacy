@@ -19,13 +19,13 @@ export type FeaturedLinkListItemProps = {
 }
 
 export const FeaturedLinkListItem = ({
-  title = 'urn:ESA:PSA:context:instrument_host:* context products',
+  title = '',
   variant = 'data',
-  description = 'The PDS4 Context Products for ESA instrument hosts, e.g. Rosetta spacecraft',
-  startDateTime = 'start_date_time": "2001-09-29T00:00:00Z',
-  stopDateTime = '2008-09-21T13:07:29Z',
-  lid = 'urn:nasa:pds:ast_spectra_reddy_neos_marscrossers:data::1.0',
-  version = '1.0'
+  description = '',
+  startDateTime = '',
+  stopDateTime = '',
+  lid = '',
+  version = ''
 }: FeaturedLinkListItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 

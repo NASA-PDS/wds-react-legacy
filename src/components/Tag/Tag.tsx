@@ -21,12 +21,12 @@ const styles = {
  *
  */
 export const Tag = ({
-  label = "Label"
+  ...otherProps
 }: ChipProps) => {
   return (
     <MuiChip 
-      sx={styles.tag} 
-      label={label}
+      sx={styles.tag}
+      {...otherProps}
     />
   );
 }

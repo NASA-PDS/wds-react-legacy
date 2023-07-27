@@ -16,8 +16,8 @@ export type CardProps = {
 }
 
 export const Card = ({
-  title = 'Astronauts',
-  content = 'Learn about those of the NASA corps who make "space sailing" their career profession.',
+  title = '',
+  content = '',
   image = testImage
 }: CardProps) => {
   const [isCardHovered, setIsCardHovered] = useState(false);

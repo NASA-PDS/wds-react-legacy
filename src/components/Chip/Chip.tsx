@@ -22,14 +22,12 @@ const styles = {
  *
  */
 export const Chip = ({
-  label = "Label",
   ...otherProps
 }: ChipProps) => {
   return (
     <MuiChip 
       sx={styles.chip}
-      variant="outlined" 
-      label={label}
+      variant="outlined"
       deleteIcon={<StarsIcon/>}
       {...otherProps}
     />

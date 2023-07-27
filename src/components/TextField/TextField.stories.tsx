@@ -10,3 +10,10 @@ export const Default: Story = {
    args: {
    },
 };
+
+export const Placeholder: Story = {
+   args: {
+      placeholder : 'placeholder'
+   },
+};
+

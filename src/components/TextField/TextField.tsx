@@ -39,13 +39,11 @@ const styles = {
  *
  */
 export const TextField = ({
-  placeholder = "placeholder",
   ...otherProps
 }: TextFieldProps) => {
   return (
     <MaterialTextField
       sx={styles.textField}
-      placeholder={placeholder}
       {...otherProps}
     />
   );

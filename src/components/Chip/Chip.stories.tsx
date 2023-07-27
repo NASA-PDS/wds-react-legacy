@@ -13,6 +13,6 @@ export const Default: Story = {
 
 export const CustomLabel: Story = {
    args: {
-     label: "Another Label"
+     label: "Label"
    },
 };

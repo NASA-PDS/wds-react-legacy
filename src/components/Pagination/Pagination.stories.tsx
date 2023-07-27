@@ -10,3 +10,11 @@ export const Default: Story = {
    args: {
    },
 };
+
+export const SetPage: Story = {
+   args: {
+      count: 5,
+      defaultPage: 3,
+      siblingCount: 1
+   },
+};

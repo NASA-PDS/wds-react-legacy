@@ -32,9 +32,6 @@ const styles = {
  *
  */
 export const Pagination = ({
-  count = 5,
-  defaultPage = 3,
-  siblingCount = 1,
   ...otherProps
 }: PaginationProps) => {
   return (
@@ -42,10 +39,7 @@ export const Pagination = ({
       <MaterialPagination 
         sx={styles.pagination}
         variant="outlined" 
-        shape="rounded" 
-        count={count}
-        defaultPage={defaultPage}
-        siblingCount={siblingCount}
+        shape="rounded"
         {...otherProps}
       />
     </Stack>

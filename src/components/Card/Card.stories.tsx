@@ -8,5 +8,12 @@ type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
    args: {
+   }
+};
+
+export const Text: Story = {
+   args: {
+      title: 'Astronauts',
+      content: 'Learn about those of the NASA corps who make "space sailing" their career profession.'
    },
 };
