@@ -23,13 +23,13 @@ export const HelloWorld = ({
   ...otherProps
 }: HelloWorldProps) => {
 
-  className = !!className ? className : "";
+  const classes = className ? className : "";
 
   const helloWorldClasses = classNames({
     "pds-wds-react-hello-world": true,
     bold: style === "bold",
     heading: style === "heading",
-    [className]: !!className,
+    [classes]: !!classes,
   });
 
   return (
