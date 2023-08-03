@@ -1,7 +1,5 @@
 import classNames from "classnames";
 
-import "./HelloWorld.scss";
-
 type HelloWorldProps = {
   /** Name to display in the outputted message */
   name?: string;
