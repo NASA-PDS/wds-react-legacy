@@ -1,7 +1,5 @@
 import classNames from "classnames";
 
-import "./HelloWorld.scss";
-
 type HelloWorldProps = {
   /** Name to display in the outputted message */
   name?: string;
@@ -25,13 +23,13 @@ export const HelloWorld = ({
   ...otherProps
 }: HelloWorldProps) => {
 
-  className = !!className ? className : "";
+  const classes = className ? className : "";
 
   const helloWorldClasses = classNames({
     "pds-wds-react-hello-world": true,
     bold: style === "bold",
     heading: style === "heading",
-    [className]: !!className,
+    [classes]: !!classes,
   });
 
   return (

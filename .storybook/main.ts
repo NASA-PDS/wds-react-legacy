@@ -1,4 +1,5 @@
-import type { StorybookConfig } from "@storybook/react-vite";
+import type { StorybookConfig } from "@storybook/react-webpack5"
+
 const config: StorybookConfig = {
   core: {
     disableTelemetry: true, // 👈 Disables telemetry, reference https://storybook.js.org/docs/react/configure/telemetry
@@ -9,13 +10,14 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
+    "@storybook/preset-scss",
   ],
   framework: {
-    name: "@storybook/react-vite",
+    name: "@storybook/react-webpack5",
     options: {},
   },
   docs: {
     autodocs: true,
-  },
+  }
 };
 export default config;
