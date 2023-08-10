@@ -5,6 +5,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import pkg from "./package.json" assert { type: "json" };
 import scss from "rollup-plugin-scss";
 import del from "rollup-plugin-delete";
+import image from '@rollup/plugin-image';
 
 // Excluded dependencies - dev dependencies
 const EXTERNAL = Object.keys(pkg.devDependencies);
@@ -36,6 +37,7 @@ export default [
       scss({
         fileName: "wds.css",
       }),
+      image()
     ],
     external: ["react", "react-dom"].concat(EXTERNAL),
   },
