@@ -23,7 +23,6 @@ const modules = require('./modules');
 const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
-const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -571,7 +570,7 @@ module.exports = function(webpackEnv) {
           watch: paths.appSrcComponents,
           silent: true,
           // The formatter is invoked directly in WebpackDevServerUtils during development
-          formatter: isEnvProduction ? typescriptFormatter : undefined,
+          formatter: isEnvProduction ? "basic" : undefined,
         }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
