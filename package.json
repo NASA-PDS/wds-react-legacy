@@ -61,7 +61,7 @@
     "identity-obj-proxy": "3.0.0",
     "is-wsl": "^2.0.0",
     "jest": "29.7.0",
-    "jest-environment-jsdom-fourteen": "0.1.0",
+    "jest-environment-jsdom-fourteen": "1.0.1",
     "jest-resolve": "24.8.0",
     "jest-watch-typeahead": "0.3.1",
     "mini-css-extract-plugin": "^0.7.0",
