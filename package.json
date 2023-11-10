@@ -46,7 +46,7 @@
     "babel-loader": "8.0.6",
     "babel-plugin-named-asset-import": "^0.3.8",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-react-app": "^9.0.0",
+    "babel-preset-react-app": "^10.0.1",
     "case-sensitive-paths-webpack-plugin": "2.4.0",
     "css-loader": "6.8.1",
     "dotenv": "16.3.1",
