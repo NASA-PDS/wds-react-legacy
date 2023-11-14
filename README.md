@@ -97,8 +97,8 @@ Install nvm to manage the nodejs environments.
 
 Use Node.js version 18.16.0 (LTS):
 
-    nvm install 18.16.0
-    nvm use 18.16.0
+    nvm install 16.20.2
+    nvm use 16.20.2
 
 
 
