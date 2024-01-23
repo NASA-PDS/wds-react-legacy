@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchResults = (props) => {
 	const classes = useStyles();
-	let history = props.history;
+	let navigate = props.navigate;
 	
 	const dispatch = useDispatch();
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -84,7 +84,7 @@ const SearchResults = (props) => {
 	
 	
 	const handleReleaseClick = (lidvid) => {
-		history.push("/release/" + lidvid);
+		navigate("/release/" + lidvid);
 		dispatch(rootActions.appAction.setIsReleasing({"page": true, "identifier": lidvid}));
 		dispatch(rootActions.appAction.resetSearch());
 		dispatch(rootActions.appAction.sendLidvidSearchRequest(lidvid));

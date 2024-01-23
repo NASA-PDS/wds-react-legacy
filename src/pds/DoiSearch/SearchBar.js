@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const SearchBar = (props) => {
   const classes = useStyles();
   let searchText = props.params['searchText'];
-  let history = props.history;
+  let navigate = props.navigate;
 
   const dispatch = useDispatch();
   const [identifier, setIdentifier] = useState('');
@@ -53,13 +53,13 @@ const SearchBar = (props) => {
 
   const handleSearch = () => {
     setPrevIdentifier(++prevIdentifier);
-    history.push("/search/" + identifier);
+    navigate("/search/" + identifier);
   };
 
   const handleClear = () => {
     setIdentifier('');
     setPrevIdentifier(++prevIdentifier);
-    history.replace("/search/");
+    navigate("/search/");
   };
 
   const trim = (searchText) => {

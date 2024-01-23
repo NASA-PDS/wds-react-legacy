@@ -42,13 +42,13 @@ const Search = (props) => {
               <PageHeader header={''} text={''}/>
               
               <SearchBar
-                history={props.history} 
+                navigate={props.navigate} 
                 params={props.params}
               />
 
               <SearchResults
                 showActions={props.showActions} 
-                history={props.history} 
+                navigate={props.navigate} 
                 params={props.params}
               />
 
