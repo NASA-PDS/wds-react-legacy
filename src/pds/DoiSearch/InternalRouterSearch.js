@@ -1,14 +1,14 @@
 import React from 'react'
 import Search from './Search';
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const InternalRouterSearch = (props) => {  
-    let history = useHistory();
+    const navigate = useNavigate();
     let params = useParams();
 
     return(
         <Search
-            history={history} 
+            navigate={navigate} 
             params={params}
             showActions={props.showActions} 
             store={props.store} 
