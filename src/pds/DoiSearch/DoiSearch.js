@@ -1,7 +1,7 @@
 import React from 'react'
 import ExternalRouterSearch from './ExternalRouterSearch';
 import InternalRouterSearch from './InternalRouterSearch';
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Routes } from 'react-router-dom';
 
 const DoiSearch = (props) => {
   return (<div>
@@ -16,7 +16,7 @@ const DoiSearch = (props) => {
         />
         :
         <HashRouter>
-          <Switch>
+          <Routes>
             <Route
               path="/search/:searchText+"
               render={(renderProps) => (
@@ -39,7 +39,7 @@ const DoiSearch = (props) => {
             <Route path="/">
                 <Redirect to="/search"/>
             </Route>
-          </Switch>
+          </Routes>
         </HashRouter>
     }
   </div>
