@@ -28,7 +28,7 @@ const PageHeader = (props) => {
         </Typography>
         <br/>
         <Typography variant="body1" className={classes.fullWidth} gutterBottom>
-          <i>Trouble finding what you are looking for? Please contact the <Link href="https://pds-gamma.jpl.nasa.gov/tools/doi/?feedback=true">PDS Operator</Link> for assistance.</i>
+          <i>Trouble finding what you are looking for? Please contact the <Link href="/tools/doi/?feedback=true">PDS Operator</Link> for assistance.</i>
         </Typography>
       </div>
   );
