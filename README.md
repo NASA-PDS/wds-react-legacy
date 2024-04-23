@@ -89,6 +89,19 @@ Import the component into your client app using the Usage section.
 
 There are sometimes problems with multiple instances of react caused by npm link. If this happens, delete `node_modules/react` inside the pds-wds-react source. Then stop and restart the client test app again.
 
+### Test Dependabot Upgrades
+1. Build locally
+```
+     npm clean-install
+```
+
+2. If that passes, deploy updated package into locally running package of our site
+     * [clone portal-legacy-docker](https://github.com/NASA-PDS/portal-legacy-docker?tab=readme-ov-file#clone-the-repository)
+     * git pull and [update sub-modules](https://github.com/NASA-PDS/portal-legacy-docker?tab=readme-ov-file#pull-git-submodules)
+     * [run docker container](https://github.com/NASA-PDS/portal-legacy-docker?tab=readme-ov-file#running-docker-container)
+
+3. Run `make copy-js-files` on this repo (assumes portal-legacy-docker is at same level directory as this repo)
+
 ## Building
 
 ### Prerequisite
