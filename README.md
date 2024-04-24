@@ -92,8 +92,7 @@ There are sometimes problems with multiple instances of react caused by npm link
 ### Test Dependabot Upgrades
 1. Build locally
 ```
-    nvm install 16.20.2
-    nvm use v16.20.2
+    nvm use
     npm clean-install --legacy-peer-deps
 ```
 
@@ -108,12 +107,11 @@ There are sometimes problems with multiple instances of react caused by npm link
 
 ### Prerequisite
 
-Install nvm to manage the nodejs environments.
+Install nvm to manage the nodejs environments. https://github.com/nvm-sh/nvm
 
-Use Node.js version 16.20.0 (LTS/Gallium):
+Use nvmrc file to switch Node.js to version 16.20.0 (LTS/Gallium):
 
-    nvm install 16.20.2
-    nvm use 16.20.2
+    nvm use
 
 
 
