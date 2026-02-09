@@ -134,30 +134,3 @@ Use the `X.X.X` semver syntax to set a version or `X.X.X-beta.X` semver syntax f
 Use `npm publish` to publish a stable version or use `npm publish --tag beta` to publish a beta version.
 
 If you want to test a beta version make sure to install the beta version instead of the latest version. Use `npm install @nasapds/pds-wds-react@beta` for the latest beta version or `npm install @nasapds/pds-wds-react@X.X.X-beta.X` for a specific version.
-
-## Search Prototype
-
-The search prototype is in the search-prototype directory.
-
-
-```
-cd search-prototype
-
-npm install
-
-npm start
-```
-
-Open an internet browser to `localhost:3000`
-
-If a CORS issue occurs when trying to search through the search box.
-
-Go to `http://localhost.jpl.nasa.gov:3000/` in your browser.
-
-Then use an extension to get around CORS.
-
-For example in chrome use https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc
-
-In Firefox you can you use https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/
-
-Just make sure to turn off the extension when not in use.
