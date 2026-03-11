@@ -15,3 +15,12 @@ export const recordNotFound = {
     }
   ]
 }
+
+export const searchError = {
+  "errors": [
+    {
+      "message": "An error occurred while processing the search. Please try again or contact the system administrator.",
+      "name": "SearchError"
+    }
+  ]
+}

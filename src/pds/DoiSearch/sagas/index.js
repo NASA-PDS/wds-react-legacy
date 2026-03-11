@@ -1,6 +1,6 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import Config from '../Config';
-import { recordNotFound } from '../sagas/error';
+import { recordNotFound, searchError } from '../sagas/error';
 import { LidvidUtil } from './LidvidUtil';
 
 function* sendLidvidSearch(api, action){
@@ -60,8 +60,10 @@ function* sendSearch(api, action){
     if(isSingleResult){
         data = [data];
     }
-    
-    if (data.length === 0) {
+
+    if (data.errors && data.errors.length > 0) {
+        data = searchError;
+    } else if (data.length === 0) {
         data = recordNotFound;
 
         let parentIdentifier = action.payload;
